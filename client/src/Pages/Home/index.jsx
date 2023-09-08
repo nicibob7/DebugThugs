@@ -1,8 +1,11 @@
 import React from 'react'
+import "./style.css"
 
 const HomePage = () => {
   return (
-    <div>HomePage</div>
+    <>
+      <div id="sideBanner"></div>
+    </>
   )
 }
 
