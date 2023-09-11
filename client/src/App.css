@@ -1,0 +1,5 @@
+:root {
+    --DeepCove: #071c42;
+    --PuertoRico: #3dcab1;
+    background-color: var(--DeepCove);
+}
