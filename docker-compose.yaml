@@ -1,27 +1,51 @@
-version: "3.8"
-
+version: '3'
 services:
   client:
-    depends_on: 
+  # image to build the container from
+    image: node:18
+    container_name: debug_thugs_client
+  # expose (a) container port(s) to a local/host port
+    ports:
+      - 5173:5173
+  # where is the code, and shall we access it?
+    volumes:
+      - type: bind
+        source: ./client
+        target: /code
+    working_dir: /code
+  # what to do once the container has started
+    command: bash -c "npm install && npm run dev"
+    depends_on:
       - api
-    build: ./client
+
+  api:
+    image: node:18
+    container_name: debug_thugs_api
+    # env_file:
+    #   - .env
+    environment:
+      - DB_URL=mongodb://db:27017/debug_thugs_db?authSource=admin
+      # - DB_URL=mongodb://admin:secret@db:27017/debug_thugs_db?authSource=admin
+      - PORT=3000
+      - BCRYPT_SALT_ROUNDS=12
     ports:
       - 3000:3000
-
-  api: 
-    depends_on: 
+    volumes:
+      - type: bind
+        source: ./app
+        target: /code
+    working_dir: /code
+    command: bash -c "npm install && npm run dev"
+    depends_on:
       - db
-    build: ./api
-    ports: 
-      - 3001:3001
-    environment: 
-      DB_URL: mongodb://db/app
 
   db:
     image: mongo:6
+    container_name: debug_thugs_db
     ports:
       - 27017:27017
     volumes:
-      - app:/data/db
+      - dbdata:/data/db
+      # - ./app/database/seed.js:/docker-entrypoint-initdb.d/seed.js:ro
 volumes:
-  app:
+  dbdata:
