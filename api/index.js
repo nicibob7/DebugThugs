@@ -1,9 +1,13 @@
-require('dotenv').config()
+// require('dotenv').config()
+const db = require("./db")
+const app = require('./app')
 
-const api = require('./api')
-const port = process.env.PORT || 5001;
+db.connect().then(() => {
+    console.log("Connected to MongoDB: " + db.url)
+})
 
+const port = process.env.PORT || 3001;
 
-api.listen(port, () => {
+app.listen(port, () => {
     console.log('API running on port', port)
 })
