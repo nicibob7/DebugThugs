@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
-const LoginCard = () => {
+const RegisterCard = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -29,18 +29,16 @@ const LoginCard = () => {
             },
         };
 
-        const response = axios.post('http://localhost:3000/login', options);
+        const response = axios.post('http://localhost:3000/register', options);
     };
 
     return (
-        <div className="login-card">
-            <form className="login-card-form" onSubmit={handleSubmit}>
-                <span style={{ fontWeight: 'bold' }}>Login</span>
-                <div className="login-card-form-input">
+        <div className="register-card">
+            <form className="register-card-form" onSubmit={handleSubmit}>
+                <span style={{ fontWeight: 'bold' }}>Register</span>
+                <div className="register-card-form-input">
                     <div>
-                        <label className="input-label" htmlFor="username">
-                            Username
-                        </label>
+                        <label htmlFor="username">Username</label>
                         <br />
                         <input
                             type="text"
@@ -50,9 +48,7 @@ const LoginCard = () => {
                         />
                     </div>
                     <div>
-                        <label className="input-label" htmlFor="password">
-                            Password
-                        </label>
+                        <label htmlFor="password">Password</label>
                         <br />
                         <input
                             type="password"
@@ -60,19 +56,20 @@ const LoginCard = () => {
                             value={password}
                             onChange={handlePassword}
                         />
+                        <br />
                     </div>
                 </div>
                 <div>
-                    <button className="login-button" type="submit">
-                        Login
+                    <button className="register-button" type="submit">
+                        Register
                     </button>
                 </div>
                 <div style={{ fontSize: '14px', color: 'grey' }}>
-                    Not registered? <NavLink to="/register">Register</NavLink>
+                    Already registered? <NavLink to="/login">Login</NavLink>
                 </div>
             </form>
         </div>
     );
 };
 
-export default LoginCard;
+export default RegisterCard;

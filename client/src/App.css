@@ -21,7 +21,8 @@ body {
     height: 100%;
 }
 
-.login-page {
+.login-page,
+.register-page {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,7 +30,8 @@ body {
     height: 100%;
 }
 
-.login-card {
+.login-card,
+.register-card {
     background-color: white;
     width: 10rem;
     height: 15rem;
@@ -40,14 +42,50 @@ body {
     align-items: center;
     box-shadow: 10px 10px 5px;
     border-radius: 5px;
+    padding: 5%;
 }
 
-.login-card-form {
+.login-button,
+.register-button {
+    color: white;
+    border-radius: 10px;
+    top: 100%;
+    border: none;
+    width: 100px;
+    background-color: var(--DeepCove);
+    transition: 0.15s;
+    align-items: center;
+}
+
+.login-button:hover,
+.register-button:hover {
+    background-color: var(--PuertoRico);
+    transition: 0.15s;
+}
+
+.login-button:active,
+.register-button:active {
+    background-color: #071c42;
+    transition: 5ms;
+}
+
+.login-card-form,
+.register-card-form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
     align-items: center;
+}
+
+.login-card-form-input div,
+.register-card-form-input div {
+    padding: 5px;
+}
+
+.login-card-form-input label,
+.register-card-form-input label {
+    font-size: 14px;
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 
