@@ -4,8 +4,12 @@
     font-weight: bold;
     font-size: 1em;
     max-width: 80vw;
-}
-#days {
+    max-height: 80vh;
+    margin-top: 10vh;
+    margin-left: 10vw;
+  }
+  
+  #days {
     display: flex;
     flex-direction: column;
     background-color: grey;
@@ -13,15 +17,38 @@
     padding-top: 5em;
     padding-bottom: 2.5em;
     gap: 5em;
-}
-#times {
+  }
+  
+  #table {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #times {
     display: flex;
     flex-direction: row;
     background-color: grey;
     border-bottom: solid black 1px;
     max-height: 3em;
     gap: 3em;
-}
-.time {
+  }
+  
+  .time {
     border: solid black 1px;
-}
+  }
+  
+  #content {
+    display: grid;
+    max-height: 80vh;
+  }
+  .box {
+    position: relative;
+    border: solid black 1px;
+    width: 100px;
+    height: 100px;
+  }
+  .row {
+    position: relative;
+    display: flex;
+  }
+  
