@@ -1,4 +1,6 @@
-const User = require('../models/User')
+const bcrypt = require('bcrypt');
+
+const User = require('../models/User');
 
 const index = async (req, res) => {
     try {
@@ -33,4 +35,42 @@ const show = async (req, res) => {
     }
 }
 
-module.exports = { index, show }
+    const register = async (req, res) => {
+        const data = req.body
+        try {
+            // generate salt with a specific cost, salt amount found in .env
+            const salt = bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS));
+
+            // hash the password
+            data["password"] = bcrypt.hash(data["password"], salt);
+
+            //password has been stored as encrypted when creating user and sent to DB
+            const result = await User.create(data)
+            
+            res.status(201).send(result)
+        } catch(err) {
+            res.status(403).json({
+                error: err.message
+            })
+        }
+    }
+
+    const login = async (req, res) => {
+        const data = req.body
+        try {
+            const user = await User.getByUser(data.email)
+            const authenticated = await bcrypt.compare(data.password, user["password"]);
+            if(!authenticated) {
+                throw new Error("incorrect credentials.");
+            } else {
+                res.status(200).json({ authenticated: true });
+            }
+        } catch(err) {
+            res.status(403).json({ 
+                error: err.message 
+            })
+        }
+    }
+
+
+module.exports = { index, show, register, login }

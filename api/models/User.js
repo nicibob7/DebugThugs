@@ -28,6 +28,26 @@ class User {
         user['id'] = id
         return user
     }
+
+    static async getByUser(email) {
+        await client.connect();
+        const response = await client.db("revision_app").collection("users").find({
+            email: email
+        })
+        const value = await response.toArray()
+        const user = new User(value[0])
+        return user
+    }
+
+    static async create({ name, email, password }) {
+        await client.connect();
+        const response = await client.db("revision_app").collection("users").insertOne({
+            name: name,
+            email: email,
+            password: password
+        })
+        return "User created"
+    }
 }
 
 module.exports = User
