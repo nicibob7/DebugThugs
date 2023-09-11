@@ -1,0 +1,27 @@
+#timetable {
+    display: flex;
+    background-color: ivory;
+    font-weight: bold;
+    font-size: 1em;
+    max-width: 80vw;
+}
+#days {
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+    border-right: solid black 1px;
+    padding-top: 5em;
+    padding-bottom: 2.5em;
+    gap: 5em;
+}
+#times {
+    display: flex;
+    flex-direction: row;
+    background-color: grey;
+    border-bottom: solid black 1px;
+    max-height: 3em;
+    gap: 3em;
+}
+.time {
+    border: solid black 1px;
+}
