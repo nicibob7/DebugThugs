@@ -50,7 +50,7 @@ const show = async (req, res) => {
             res.status(201).send(result)
         } catch(err) {
             res.status(403).json({
-                error: err.message
+                error: err.message,
             })
         }
     }
