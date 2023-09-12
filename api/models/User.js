@@ -36,6 +36,7 @@ class User {
         })
         const value = await response.toArray()
         const user = new User(value[0])
+        user['email'] = email
         return user
     }
 

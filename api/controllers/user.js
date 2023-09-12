@@ -39,10 +39,10 @@ const show = async (req, res) => {
         const data = req.body
         try {
             // generate salt with a specific cost, salt amount found in .env
-            const salt = bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS));
+            const salt = await bcrypt.genSalt(parseInt(process.env.BCRYPT_SALT_ROUNDS));
 
             // hash the password
-            data["password"] = bcrypt.hash(data["password"], salt);
+            data["password"] = await bcrypt.hash(data["password"], salt);
 
             //password has been stored as encrypted when creating user and sent to DB
             const result = await User.create(data)

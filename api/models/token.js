@@ -1,4 +1,6 @@
-const { v4: uuidv4 } = require("uuid")
+const { v4: uuidv4 } = require("uuid");
+const client = require('../database/setup');
+const { ObjectID } = require('mongodb')
 
 // const db = require("../database/connect")
 
@@ -11,8 +13,12 @@ class Token {
 
     static async create (user_id){
         const token = uuidv4()
-        // const response
-        // const newID
+        const response = await client.db("revision_app").collection('tokens').insertOne({
+            token: token,
+            user_id: user_id
+        })
+        newId = 
+
         return 0
     }
 
