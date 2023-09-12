@@ -23,7 +23,7 @@ const TimeTable = () => {
   // console.log(cell)
 
   return (
-    <div id="timetable">
+    <div id="timetable" data-testid="timetable">
       <Days days={days}/>
       <div id="table">
         <Times timeSlots={timeSlots} cell={cell} />
