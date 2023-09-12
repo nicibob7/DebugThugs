@@ -29,11 +29,11 @@
     padding: 10px;
 }
 
-a{
+#NavBar a{
     position: relative;
 }
 
-a::before{
+#NavBar a::before{
     content: "";
     background-color: var(--PuertoRico);
     width: 2px;

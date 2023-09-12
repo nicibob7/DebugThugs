@@ -19,7 +19,6 @@ class User {
     static async getById(idx) {
         await client.connect();
         const id = new ObjectId(idx)
-        console.log(id)
         const response = await client.db("revision_app").collection("users").find({
             _id: id,
         })
