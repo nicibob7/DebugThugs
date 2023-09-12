@@ -21,6 +21,11 @@ body {
     height: 100%;
 }
 
+.timetable-page {
+    padding: 10px;
+    height: 100%;
+}
+
 .login-page,
 .register-page {
     display: flex;

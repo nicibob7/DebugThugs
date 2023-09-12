@@ -34,7 +34,7 @@ const RegisterCard = () => {
 
     return (
         <div className="register-card">
-            <form className="register-card-form" onSubmit={handleSubmit}>
+            <form role="form" className="register-card-form" onSubmit={handleSubmit}>
                 <span style={{ fontWeight: 'bold' }}>Register</span>
                 <div className="register-card-form-input">
                     <div>

@@ -34,7 +34,7 @@ const LoginCard = () => {
 
     return (
         <div className="login-card">
-            <form className="login-card-form" onSubmit={handleSubmit}>
+            <form role="form" className="login-card-form" onSubmit={handleSubmit}>
                 <span style={{ fontWeight: 'bold' }}>Login</span>
                 <div className="login-card-form-input">
                     <div>
