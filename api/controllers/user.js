@@ -46,7 +46,6 @@ const register = async (req, res) => {
 
         //password has been stored as encrypted when creating user and sent to DB
         const result = await User.create(data);
-        console.log('HIT LINE 52')
 
         res.status(201).send(result);
     } catch (err) {
@@ -61,6 +60,7 @@ const login = async (req, res) => {
     try {
         const user = await User.getByUser(data.email);
         const authenticated = await bcrypt.compare(data.password, user['password']);
+        console.log(authenticated)
         if (!authenticated) {
             throw new Error('incorrect credentials.');
         } else {

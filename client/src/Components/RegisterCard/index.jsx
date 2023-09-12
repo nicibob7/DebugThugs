@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const RegisterCard = () => {
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate()
 
-    const handleUsername = (event) => {
-        setUsername(event.target.value);
+    const handleName = (event) => {
+        setName(event.target.value);
     };
 
     const handleEmail = (event) => {
@@ -25,7 +26,7 @@ const RegisterCard = () => {
         const options = {
             method: 'POST',
             body: JSON.stringify({
-                name: form.get('username'),
+                name: form.get('name'),
                 email: form.get('email'),
                 password: form.get('password'),
             }),
@@ -36,8 +37,12 @@ const RegisterCard = () => {
         };
 
         const response = await fetch('http://localhost:3000/users/register', options);
-        const data = await response.json()
-        console.log(data);
+
+        if (response.status === 201) {
+            navigate("/")
+        } else {
+            alert('Failed to register') // change this out
+        }
     };
 
     return (
@@ -46,13 +51,13 @@ const RegisterCard = () => {
                 <span style={{ fontWeight: 'bold' }}>Register</span>
                 <div className="register-card-form-input">
                     <div>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="name">Name</label>
                         <br />
                         <input
                             type="text"
-                            name="username"
-                            value={username}
-                            onChange={handleUsername}
+                            name="name"
+                            value={name}
+                            onChange={handleName}
                         />
                     </div>
                     <div>
