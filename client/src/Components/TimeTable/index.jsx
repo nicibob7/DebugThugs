@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Days, Times, TableContent } from "../export"
 import "./style.css";
 
 const TimeTable = () => {
@@ -19,43 +20,14 @@ const TimeTable = () => {
   const handleClick = (day, time) => {
     setCell({ day, time });
   };
-  console.log(cell)
+  // console.log(cell)
 
   return (
-    <div id="timetable">
-      <div id="days">
-        {days.map((day, dayIndex) => (
-          <div key={dayIndex} className="day">
-            {day}
-          </div>
-        ))}
-      </div>
+    <div id="timetable" data-testid="timetable">
+      <Days days={days}/>
       <div id="table">
-        <div id="times">
-          {timeSlots().map((time, timeIndex) => (
-            <div
-              key={timeIndex}
-              className={`time ${cell.time === time ? "selected-time" : ""}`}
-            >
-              {time}
-            </div>
-          ))}
-        </div>
-        <div id="content">
-          {days.map((day, dayIndex) => (
-            <div key={dayIndex} className="row">
-              {timeSlots().map((time, timeIndex) => (
-                <div
-                  key={timeIndex}
-                  className={`box ${cell.day === day && cell.time === time ? "selected-box" : ""}`}
-                  onClick={() => handleClick(day, time)}
-                >
-                  {cell.day === day && cell.time === time ? "box" : ""}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
+        <Times timeSlots={timeSlots} cell={cell} />
+        <TableContent days={days} cell={cell} timeSlots={timeSlots} handleClick={handleClick} />
       </div>
     </div>
   );
