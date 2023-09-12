@@ -5,7 +5,7 @@ const { MongoClient } = require("mongodb");
 // const connect_url = process.env.DB_CONNECT (for remote database, replace in the .env)
 
 //  local connection url
-const connect_url = process.env.DB_CONNECT
+const connect_url = process.env.DB_URL
 console.log(connect_url)
 
 const client = new MongoClient(connect_url)
@@ -22,3 +22,22 @@ const connectDB = async () => {
 connectDB();
 
 module.exports = client;
+
+
+
+// require('dotenv').config()
+
+// const { MongoClient } = require('mongodb')
+// const connectionUrl = process.env.DB_URL;
+
+// // const client = new MongoClient(connectionUrl)
+
+// const dbName = "revision_app"
+
+// const init = async () => {
+//   let client = await MongoClient.connect(connectionUrl)
+//   console.log('connected to database!', dbName)
+//   return client.db(dbName)
+// }
+
+// module.exports = { init };
