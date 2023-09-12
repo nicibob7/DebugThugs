@@ -15,6 +15,18 @@ class Entry {
         return allValues;
     }
 
+    static async getById(idx) {
+        await client.connect()
+        const id = new ObjectId(idx)
+        const response = await client.db("revision_app").collection("entries").find({
+            _id: id,
+        })
+        const value = await response.toArray()
+        const entry = new Entry(value[0])
+        entry["id"] = id
+        return entry
+    }
+
     static async create({date, content}) {
         try {
             await client.connect()
@@ -22,9 +34,21 @@ class Entry {
                 date: date,
                 content: content
             })
-            return "Entry created"
+            return response
         } catch (error) {
             
+        }
+    }
+
+    async destroy(id) {
+        try {
+            await client.connect()
+            const response = await client.db("revision_app").collection("entries").deleteOne({
+                id: id
+            })
+            return response
+        } catch (error) {
+            console.log("Failed to delete")
         }
     }
 }
