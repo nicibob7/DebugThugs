@@ -1,28 +1,36 @@
-import React from 'react';
-import './timetable.css';
-import TimetableItem from '../TimetableItem';
+import React, { useState } from "react";
+import { Days, Times, TableContent } from "../export"
+import "./style.css";
 
-const Timetable = () => {
-    const task = {
-        day: 2,
-        start: 14,
-        end: 17,
-    };
+const TimeTable = () => {
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
-    return (
-        <div className="timetable-grid">
-            <div className="timetable-grid-day">
-                Monday
-                <TimetableItem />
-            </div>
-            <div className="timetable-grid-day">Tuesday</div>
-            <div className="timetable-grid-day">Wednesday</div>
-            <div className="timetable-grid-day">Thursday</div>
-            <div className="timetable-grid-day">Friday</div>
-            <div className="timetable-grid-day">Saturday</div>
-            <div className="timetable-grid-day">Sunday</div>
-        </div>
-    );
+  const timeSlots = () => {
+    const timeSlots = [];
+    for (let hour = 0; hour < 24; hour += 2) {
+      const startTime = `${hour.toString().padStart(2, "0")}:00`;
+      const endTime = `${(hour + 2).toString().padStart(2, "0")}:00`;
+      timeSlots.push(`${startTime} - ${endTime}`);
+    }
+    return timeSlots;
+  };
+
+  const [cell, setCell] = useState({ day: "", time: "" });
+
+  const handleClick = (day, time) => {
+    setCell({ day, time });
+  };
+  // console.log(cell)
+
+  return (
+    <div id="timetable">
+      <Days days={days}/>
+      <div id="table">
+        <Times timeSlots={timeSlots} cell={cell} />
+        <TableContent days={days} cell={cell} timeSlots={timeSlots} handleClick={handleClick} />
+      </div>
+    </div>
+  );
 };
 
-export default Timetable;
+export default TimeTable;
