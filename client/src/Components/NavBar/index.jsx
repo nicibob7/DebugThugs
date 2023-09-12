@@ -6,7 +6,7 @@ const NavBar = () => {
     const style = { textDecoration: 'none', fontWeight: 'bold', color: 'color: var(--PuertoRico)' };
     return (
         <>
-            <div id="NavBar">
+            <div id="NavBar" data-testid="wrapper">
                 <div className="mainNav">
                     <NavLink to="/" style={style}>
                         Home |{' '}
