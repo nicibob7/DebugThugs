@@ -42,8 +42,8 @@
     max-height: 80vh;
   }
   .box {
-    position: relative;
     border: solid black 1px;
+    text-align: center;
     width: 100px;
     height: 100px;
   }

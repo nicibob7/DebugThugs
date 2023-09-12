@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
-import './style.css';
+import React, { useState } from "react";
+import "./style.css";
 
 const TimeTable = () => {
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
   const timeSlots = () => {
     const timeSlots = [];
     for (let hour = 0; hour < 24; hour += 2) {
-      const startTime = `${hour.toString().padStart(2, '0')}:00`;
-      const endTime = `${(hour + 2).toString().padStart(2, '0')}:00`;
+      const startTime = `${hour.toString().padStart(2, "0")}:00`;
+      const endTime = `${(hour + 2).toString().padStart(2, "0")}:00`;
       timeSlots.push(`${startTime} - ${endTime}`);
     }
     return timeSlots;
   };
 
-  const [selectedCell, setSelectedCell] = useState({ day: null, time: null });
+  const [cell, setCell] = useState({ day: "", time: "" });
 
-  const handleCellClick = (day, time) => {
-    setSelectedCell({ day, time });
+  const handleClick = (day, time) => {
+    setCell({ day, time });
   };
-  console.log(selectedCell)
+  console.log(cell)
 
   return (
     <div id="timetable">
@@ -35,7 +35,7 @@ const TimeTable = () => {
           {timeSlots().map((time, timeIndex) => (
             <div
               key={timeIndex}
-              className={`time ${selectedCell.time === time ? 'selected-time' : ''}`}
+              className={`time ${cell.time === time ? "selected-time" : ""}`}
             >
               {time}
             </div>
@@ -47,10 +47,10 @@ const TimeTable = () => {
               {timeSlots().map((time, timeIndex) => (
                 <div
                   key={timeIndex}
-                  className={`box ${selectedCell.day === day && selectedCell.time === time ? 'selected-box' : ''}`}
-                  onClick={() => handleCellClick(day, time)}
+                  className={`box ${cell.day === day && cell.time === time ? "selected-box" : ""}`}
+                  onClick={() => handleClick(day, time)}
                 >
-                  {selectedCell.day === day && selectedCell.time === time ? 'box' : ''}
+                  {cell.day === day && cell.time === time ? "box" : ""}
                 </div>
               ))}
             </div>
