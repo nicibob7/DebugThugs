@@ -22,7 +22,43 @@
     gap: 1em;
 }
 #NavBar .loginNav {
-    position: sticky;
-    margin-left: 50vw;
-    padding: 10px
+    /* position: sticky; */
+    /* margin-left: 50vw; */
+    position: absolute;
+    right: 50px;
+    padding: 10px;
+}
+
+a{
+    position: relative;
+}
+
+a::before{
+    content: "";
+    background-color: var(--PuertoRico);
+    width: 2px;
+    height: 30px;
+    position: absolute;
+    top: 3px;
+    left: -15px;
+}
+
+.mainNav a:nth-child(1)::before{
+    background-color: transparent;
+}
+
+@media screen and (max-width:650px){
+    #NavBar .loginNav{
+        position: relative;
+        right: 0;
+        margin-left: 10px;
+    }
+    #NavBar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #NavBar .mainNav{
+        margin-left: 0;
+    }
 }

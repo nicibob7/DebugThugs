@@ -9,18 +9,22 @@ const NavBar = () => {
             <div id="NavBar" data-testid="wrapper">
                 <div className="mainNav">
                     <NavLink to="/" style={style}>
-                        Home |{' '}
+                        {/* Home |{' '} */}
+                        Home
                     </NavLink>
                     <NavLink to="/profile" style={style}>
-                        Profile |{' '}
+                        {/* Profile |{' '} */}
+                        Profile
                     </NavLink>
                     <NavLink to="/timetable" style={style}>
-                        Timetable{' '}
+                        {/* Timetable{' '} */}
+                        Timetable
                     </NavLink>
                 </div>
                 <div className="loginNav">
                     <NavLink to="/login" style={style}>
-                        | Login{' '}
+                        {/* | Login{' '} */}
+                        Login
                     </NavLink>
                 </div>
             </div>
