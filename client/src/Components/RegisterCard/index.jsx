@@ -1,35 +1,43 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import axios from 'axios';
 
 const RegisterCard = () => {
     const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleUsername = (event) => {
         setUsername(event.target.value);
     };
 
+    const handleEmail = (event) => {
+        setEmail(event.target.value);
+    };
+
     const handlePassword = (event) => {
         setPassword(event.target.value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const form = new FormData(event.target);
         const options = {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: {
-                username: form.get('username'),
+            method: 'POST',
+            body: JSON.stringify({
+                name: form.get('username'),
+                email: form.get('email'),
                 password: form.get('password'),
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
             },
         };
 
-        const response = axios.post('http://localhost:3000/register', options);
+        const response = await fetch('http://localhost:3000/users/register', options);
+        const data = await response.json()
+        console.log(data);
     };
 
     return (
@@ -46,6 +54,11 @@ const RegisterCard = () => {
                             value={username}
                             onChange={handleUsername}
                         />
+                    </div>
+                    <div>
+                        <label htmlFor="email">Email</label>
+                        <br />
+                        <input type="email" name="email" value={email} onChange={handleEmail} />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>

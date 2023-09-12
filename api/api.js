@@ -6,7 +6,7 @@ const userRouter = require('./routers/users')
 const api = express();
 
 api.use(cors());
-api.use(express());
+api.use(express.json());
 api.use(logger);
 
 api.get("/", (req, res) => {
