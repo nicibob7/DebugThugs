@@ -5,6 +5,6 @@ const TTRouter = Router()
 
 TTRouter.get("/", TTController.index)
 TTRouter.post("/", TTController.create)
-// TTRouter.delete("/entries", TTController.destroy)
+TTRouter.delete("/:id", TTController.destroy)
 
 module.exports = TTRouter
