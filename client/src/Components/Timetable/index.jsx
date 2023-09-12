@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Days, Times, TableContent } from "../export"
+import axios from "axios"
 import "./style.css";
 
 const TimeTable = () => {
@@ -20,7 +21,7 @@ const TimeTable = () => {
   const handleClick = (day, time) => {
     setCell({ day, time });
   };
-  // console.log(cell)
+  console.log(cell)
 
   return (
     <div id="timetable" data-testid="timetable">
