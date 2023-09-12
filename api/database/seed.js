@@ -6,7 +6,7 @@ const seedDB = async () => {
     console.log('awaiting seed...')
     await client.db('revision_app').collection('users').drop()
     await client.db('revision_app').collection('users').insertOne(
-        { name: "Louis Theroux", email: "example@gmail.com", password: "pass" }
+        { _id:0, name: "Louis Theroux", email: "example@gmail.com", password: "pass" }
     )
     console.log("DB seeded !")
     await client.close()
