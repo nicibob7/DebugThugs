@@ -73,6 +73,7 @@ const TimeTable = () => {
     getWeek()
     getEntries()
   },[week])
+  console.log(cell)
 
   return (
     <div id="timetable" data-testid="timetable">
@@ -90,11 +91,8 @@ const TimeTable = () => {
       <Days days={days} week={week} date={date} weekDates={weekDates}/>
       <div id="table">
         <Times timeSlots={timeSlots} cell={cell} />
-        <TableContent days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} />
+        <TableContent days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} entries={entries}/>
       </div>
-      {entries.map(e => {
-                return console.log(e.weekNum, e.day, e.time, e.content)
-            })}
     </div>
   );
 };
