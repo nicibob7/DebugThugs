@@ -1,35 +1,36 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const LoginCard = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    const handleUsername = (event) => {
-        setUsername(event.target.value);
+    const handleEmail = (event) => {
+        setEmail(event.target.value);
     };
 
     const handlePassword = (event) => {
         setPassword(event.target.value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const form = new FormData(event.target);
-        const options = {
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: {
-                username: form.get('username'),
-                password: form.get('password'),
-            },
+        const data = {
+            email: form.get('email'),
+            password: form.get('password'),
         };
-
-        const response = axios.post('http://localhost:3000/login', options);
+        try {
+            const response = await axios.post('http://localhost:3000/users/login', data);
+            if (response.status === 200) {
+                navigate('/');
+            }
+        } catch (error) {
+            alert('invalid credentials');
+        }
     };
 
     return (
@@ -38,16 +39,11 @@ const LoginCard = () => {
                 <span style={{ fontWeight: 'bold' }}>Login</span>
                 <div className="login-card-form-input">
                     <div>
-                        <label className="input-label" htmlFor="username">
-                            Username
+                        <label className="input-label" htmlFor="email">
+                            Email
                         </label>
                         <br />
-                        <input
-                            type="text"
-                            name="username"
-                            value={username}
-                            onChange={handleUsername}
-                        />
+                        <input type="text" name="email" value={email} onChange={handleEmail} />
                     </div>
                     <div>
                         <label className="input-label" htmlFor="password">
