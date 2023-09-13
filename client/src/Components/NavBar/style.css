@@ -28,13 +28,11 @@
     right: 50px;
     padding: 10px;
 }
-
-a{
+#NavBar a {
     position: relative;
 }
-
-a::before{
-    content: "";
+#NavBar a::before {
+    content: '';
     background-color: var(--PuertoRico);
     width: 2px;
     height: 30px;
@@ -42,23 +40,21 @@ a::before{
     top: 3px;
     left: -15px;
 }
-
-.mainNav a:nth-child(1)::before{
+.mainNav a:nth-child(1)::before {
     background-color: transparent;
 }
-
-@media screen and (max-width:650px){
-    #NavBar .loginNav{
+@media screen and (max-width: 650px) {
+    #NavBar .loginNav {
         position: relative;
         right: 0;
         margin-left: 10px;
     }
-    #NavBar{
+    #NavBar {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    #NavBar .mainNav{
+    #NavBar .mainNav {
         margin-left: 0;
     }
 }
