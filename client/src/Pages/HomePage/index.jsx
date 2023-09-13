@@ -1,12 +1,15 @@
-import React from 'react'
-import "./style.css"
+import React from 'react';
+import './style.css';
+import { useAuth } from '../../Contexts';
 
 const HomePage = () => {
-  return (
-    <>
-      <div id="sideBanner"></div>
-    </>
-  )
-}
+    const { user } = useAuth();
 
-export default HomePage
+    return (
+        <>
+            <div id="sideBanner"></div>
+        </>
+    );
+};
+
+export default HomePage;

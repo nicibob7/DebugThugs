@@ -1,9 +1,11 @@
 import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import './style.css';
+import { useAuth } from '../../Contexts';
 
 const NavBar = () => {
     const style = { textDecoration: 'none', fontWeight: 'bold', color: 'color: var(--PuertoRico)' };
+    const { user } = useAuth();
     return (
         <>
             <div id="NavBar" data-testid="wrapper">
@@ -12,20 +14,22 @@ const NavBar = () => {
                         {/* Home |{' '} */}
                         Home
                     </NavLink>
-                    <NavLink to="/profile" style={style}>
-                        {/* Profile |{' '} */}
-                        Profile
-                    </NavLink>
                     <NavLink to="/timetable" style={style}>
                         {/* Timetable{' '} */}
                         Timetable
                     </NavLink>
                 </div>
                 <div className="loginNav">
-                    <NavLink to="/login" style={style}>
-                        {/* | Login{' '} */}
-                        Login
-                    </NavLink>
+                    {user ? (
+                        <NavLink to="/profile" style={style}>
+                            {/* Profile |{' '} */}
+                            {user.name}
+                        </NavLink>
+                    ) : (
+                        <NavLink to="/login" style={style}>
+                            Login
+                        </NavLink>
+                    )}
                 </div>
             </div>
             <Outlet />

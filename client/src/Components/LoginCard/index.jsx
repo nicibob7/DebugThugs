@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useAuth } from '../../Contexts';
 
 const LoginCard = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const { user, setUser } = useAuth();
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -27,10 +29,21 @@ const LoginCard = () => {
             const response = await axios.post('http://localhost:3000/users/login', data);
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
+                const token = localStorage.getItem('token');
+                const options = {
+                    headers: {
+                        Authorization: token,
+                    },
+                };
+                const response2 = await axios.get(
+                    'http://localhost:3000/users/authenticate',
+                    options
+                );
+                setUser(response2.data);
                 navigate('/');
             }
         } catch (error) {
-            alert('invalid credentials');
+            alert(error.message);
         }
     };
 
