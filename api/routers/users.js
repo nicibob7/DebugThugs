@@ -4,6 +4,7 @@ const userController = require('../controllers/user');
 const userRouter = Router();
 
 userRouter.get('/', userController.index)
+userRouter.patch('/', userController.addTask)
 userRouter.get('/:id', userController.show)
 userRouter.post('/register', userController.register)
 userRouter.post('/login', userController.login)
