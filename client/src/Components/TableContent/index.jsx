@@ -9,7 +9,7 @@ const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
                 <div
                   key={timeIndex}
                   className={`box ${cell.day === day && cell.time === time ? "selected-box" : ""}`}
-                  onClick={() => handleClick(day, time,weekNum)}
+                  onClick={() => handleClick(day, time, weekNum)}
                 >
                   {cell.day === day && cell.time === time ? "box" : ""}
                 </div>
