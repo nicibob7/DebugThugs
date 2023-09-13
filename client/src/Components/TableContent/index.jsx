@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TableContent = ({ days, cell, timeSlots, handleClick }) => {
+const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
   return (
     <div id="content">
           {days.map((day, dayIndex) => (
@@ -9,7 +9,7 @@ const TableContent = ({ days, cell, timeSlots, handleClick }) => {
                 <div
                   key={timeIndex}
                   className={`box ${cell.day === day && cell.time === time ? "selected-box" : ""}`}
-                  onClick={() => handleClick(day, time)}
+                  onClick={() => handleClick(day, time, weekNum)}
                 >
                   {cell.day === day && cell.time === time ? "box" : ""}
                 </div>
