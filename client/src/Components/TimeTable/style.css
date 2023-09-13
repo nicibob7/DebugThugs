@@ -6,9 +6,11 @@
   max-height: 80%;
   margin-top: 10vh;
   margin-left: 10vw;
+  position: relative;
 }
 
 #days {
+position: relative;
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -32,9 +34,19 @@ justify-content: center;
 align-items: center;
 }
 
+.day{
+  display: flex;
+  flex-direction: column;
+}
+
+.day>span{
+  margin-bottom: 5px;
+}
+
 #table {
 display: flex;
 flex-direction: column;
+z-index: 5;
 }
 
 #times {
@@ -47,7 +59,6 @@ letter-spacing: 0.4px;
 border-bottom: solid black 1px;
 height: 30px;
 border-radius: 0px 10px 0px 0px;
-/* gap: 3em; */
 }
 
 .time {
@@ -86,4 +97,40 @@ display: flex;
 
 .selected-box{
 background-color: grey;
+}
+
+#datebox{
+  position: absolute;
+  top: 5px;
+  left: 0;
+  height: 1rem;
+}
+
+.week-nav{
+  font-size: 2rem;
+  color: white;
+  position: absolute;
+  top: -50px;
+  left: -8%;
+  display: flex;
+}
+
+.week-nav>*{
+  margin: 0px 5px;
+  padding: 0px 0px;
+}
+
+#left,
+#right{
+  background-color: var(--DeepCove);
+  color: ivory;
+  font-size: 1.5rem;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
 }
