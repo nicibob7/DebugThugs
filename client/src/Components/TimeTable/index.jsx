@@ -73,13 +73,12 @@ const TimeTable = () => {
     getWeek()
     getEntries()
   },[week])
-  console.log("Selected Cell: ", cell)
 
   return (
     <div id="timetable" data-testid="timetable">
-      {inputActive && (
+      {/* {inputActive} && (
         <InputForm />
-      )}
+      ) */}
       <div className="week-nav">
         <button id="left" onClick={(() => setWeek(week-1))} >{"<"}</button>
         <div className="week-year">
@@ -94,7 +93,7 @@ const TimeTable = () => {
         <TableContent days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} />
       </div>
       {entries.map(e => {
-                return console.log("Backend entries: ", e.weekNum, e.day, e.time, e.content)
+                return console.log(e.weekNum, e.day, e.time, e.content)
             })}
     </div>
   );
