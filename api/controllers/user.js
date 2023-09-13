@@ -19,6 +19,19 @@ const index = async (req, res) => {
     }
 };
 
+const getUserByToken = async (req, res) => {
+    try {
+        // const token = req.body.token;
+        const token = req.headers['authorization'];
+        const tokenObj = await Token.getOneByToken(token);
+        const user_id = tokenObj.user_id;
+        const user = await User.getById(user_id);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(404).json({ error: error.message });
+    }
+};
+
 const show = async (req, res) => {
     try {
         const idx = req.params.id;
@@ -89,4 +102,4 @@ const addTask = async (req, res) => {
     }
 };
 
-module.exports = { index, show, register, login, addTask };
+module.exports = { index, show, register, login, addTask, getUserByToken };

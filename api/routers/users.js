@@ -3,10 +3,11 @@ const userController = require('../controllers/user');
 
 const userRouter = Router();
 
-userRouter.get('/', userController.index)
-userRouter.patch('/', userController.addTask)
-userRouter.get('/:id', userController.show)
-userRouter.post('/register', userController.register)
-userRouter.post('/login', userController.login)
+userRouter.get('/', userController.index);
+userRouter.get('/authenticate', userController.getUserByToken);
+userRouter.patch('/', userController.addTask);
+userRouter.get('/:id', userController.show);
+userRouter.post('/register', userController.register);
+userRouter.post('/login', userController.login);
 
-module.exports = userRouter
+module.exports = userRouter;
