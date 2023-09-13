@@ -42,23 +42,21 @@
     top: 3px;
     left: -15px;
 }
-
-.mainNav a:nth-child(1)::before{
+.mainNav a:nth-child(1)::before {
     background-color: transparent;
 }
-
-@media screen and (max-width:650px){
-    #NavBar .loginNav{
+@media screen and (max-width: 650px) {
+    #NavBar .loginNav {
         position: relative;
         right: 0;
         margin-left: 10px;
     }
-    #NavBar{
+    #NavBar {
         display: flex;
         justify-content: center;
         align-items: center;
     }
-    #NavBar .mainNav{
+    #NavBar .mainNav {
         margin-left: 0;
     }
 }
