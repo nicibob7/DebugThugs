@@ -47,6 +47,36 @@ class User {
         })
         return "User created"
     }
+
+    static async addTask({email, date, description}) {
+        console.log(email, date, description)
+        try{
+            await client.connect()
+            const response = await client.db("revision_app").collection("users").find({
+                email: email
+            })
+            const value = await response.toArray()
+            if(!value[0].tasks){
+                value[0].tasks = []
+            }
+            const task = value[0].tasks
+            const response2 = await client.db("revision_app").collection("users").updateOne(
+                {email: email},
+                {
+                    $set: { tasks: [...task, {date: date, description: description}] }
+                }
+            )
+            if(response2.modifiedCount === 1){
+                return "Updated!"
+            }
+            else{
+                throw new Error("Update failed")
+            }
+        }
+        catch(err){
+            return ({ err: err.message })
+        }
+    }
 }
 
 module.exports = User
