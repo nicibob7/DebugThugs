@@ -28,11 +28,13 @@
     right: 50px;
     padding: 10px;
 }
-#NavBar a {
+
+#NavBar a{
     position: relative;
 }
-#NavBar a::before {
-    content: '';
+
+#NavBar a::before{
+    content: "";
     background-color: var(--PuertoRico);
     width: 2px;
     height: 30px;

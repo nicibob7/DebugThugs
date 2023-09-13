@@ -12,3 +12,9 @@
     min-width: 0px;
     border-left: solid var(--PuertoRico) 13.5vw;
 }
+
+@media screen and (max-width:650px){
+    #sideBanner{
+        display: none;
+    }
+}
