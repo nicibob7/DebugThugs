@@ -75,13 +75,7 @@ const register = async (req, res) => {
                 error: err.message 
             })
         }
-    } catch (err) {
-        res.status(403).json({
-            error: err.message,
-        });
     }
-};
-
 
     const addTask = async (req, res) => {
         const data = req.body
