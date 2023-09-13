@@ -5,7 +5,7 @@ const RegisterCard = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleName = (event) => {
         setName(event.target.value);
@@ -31,7 +31,7 @@ const RegisterCard = () => {
                 password: form.get('password'),
             }),
             headers: {
-                'Accept': 'application/json',
+                Accept: 'application/json',
                 'Content-Type': 'application/json',
             },
         };
@@ -39,9 +39,9 @@ const RegisterCard = () => {
         const response = await fetch('http://localhost:3000/users/register', options);
 
         if (response.status === 201) {
-            navigate("/")
+            navigate('/login');
         } else {
-            alert('Failed to register') // change this out
+            alert('Failed to register'); // change this out
         }
     };
 
@@ -53,12 +53,7 @@ const RegisterCard = () => {
                     <div>
                         <label htmlFor="name">Name</label>
                         <br />
-                        <input
-                            type="text"
-                            name="name"
-                            value={name}
-                            onChange={handleName}
-                        />
+                        <input type="text" name="name" value={name} onChange={handleName} />
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>

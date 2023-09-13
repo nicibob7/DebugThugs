@@ -13,38 +13,18 @@ const InputForm = () => {
         e.preventDefault()
         console.log(content)
     }
-
-    async function getEntries() {
-        try {
-            const response = await fetch("http://localhost:3000/timetable")
-            const data = await response.json()
-            const arr = data.entry
-            setEntries(arr)
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
-
-    useEffect(() => {
-        getEntries()
-    }, [])
     
   return (
     <>
     <div id="overlay">
         <div id="overlay-content">
             <p className="prompt"> Add a new entry: </p>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} data-testid="form">
                 <input type="text" id="input" value={content} onChange={handleInput} placeholder="Sample text" />
                 <button type="submit">Submit</button>
             </form>
         </div>
     </div>
-    <div>
-            {entries.map(e => {
-                return console.log(e.weekNum, e.day, e.time, e.content)
-            })}
-        </div>
     </>
     
   )

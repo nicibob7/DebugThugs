@@ -10,11 +10,11 @@ import {
 } from './Pages/export';
 import { NavBar } from './Components/export';
 import './App.css';
+import { AuthProvider } from './Contexts';
 
 function App() {
-
     return (
-        <>
+        <AuthProvider>
             <Routes>
                 <Route path="/" element={<NavBar />}>
                     <Route index element={<HomePage />} />
@@ -25,7 +25,7 @@ function App() {
                 <Route path="register" element={<RegisterPage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
-        </>
+        </AuthProvider>
     );
 }
 
