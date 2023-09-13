@@ -78,15 +78,12 @@ const TimeTable = () => {
   return (
     <div id="timetable" data-testid="timetable">
       <div className="week-nav">
-
         <button id="left" onClick={(() => setWeek(week-1))} >{"<"}</button>
         <div className="week-year">
           <p>{year}</p>
           <p id="week-number">Week {resolveWeek()}</p>
         </div>
-
         <button id="right" onClick={(() => setWeek(week+1))} >{">"}</button>
-
       </div>
       <Days days={days} week={week} date={date} weekDates={weekDates}/>
       <div id="table">
