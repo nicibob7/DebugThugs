@@ -76,9 +76,9 @@ const TimeTable = () => {
 
   return (
     <div id="timetable" data-testid="timetable">
-      {/* {inputActive} && (
+      {inputActive && (
         <InputForm />
-      ) */}
+      )}
       <div className="week-nav">
         <button id="left" onClick={(() => setWeek(week-1))} >{"<"}</button>
         <div className="week-year">
