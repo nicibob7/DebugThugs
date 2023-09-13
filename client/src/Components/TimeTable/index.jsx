@@ -68,6 +68,8 @@ const TimeTable = () => {
     setWeekInc(0)
   },[weekInc])
 
+  console.log(cell)
+
   return (
     <div id="timetable" data-testid="timetable">
       <div className="week-nav">
