@@ -16,13 +16,10 @@ const TimeTable = () => {
     return timeSlots;
   };
 
-  const [week, setWeek] = useState(0)
-  const [weekInc,setWeekInc] = useState(0)
-
-  const [weekDates,setWeekDates] = useState([])
-
+  const [year, setYear] = useState(new Date().getFullYear()) // stores current year
+  const [week,setWeek] = useState((Math.ceil(Math.floor(((new Date()) - (new Date(year,0,1))) / (24*60*60*1000)/7)+1))%52) // initalize week with current week number
+  const [weekDates,setWeekDates] = useState([]) // stores dates of week
   const [date,setDate] = useState("")
-
   const [cell, setCell] = useState({ day: "", time: "", weekNum:"" });
 
 
@@ -30,54 +27,63 @@ const TimeTable = () => {
     setCell({ day, time, weekNum });
   };
 
-  const changeWeek = (incDec) => {
-    setWeekInc(incDec)
-    console.log(weekInc)
+
+  const resolveWeek = () => {
+    if (week%52 == 0){
+      return 52
+    }else if(week%52 < 0){
+      return 52+(week%52)
+    }else{
+      return week%52
+    }
   }
 
   const getWeek = () => {
-    const currDate = new Date()
-    const year = new Date().getFullYear()
-    const startDate = new Date(year,0,1)
-
     const weekDays = []
+
 
     let weekNum = week;
     let newDate;
 
-    if(!week){
-      let days = Math.floor((currDate - startDate) / (24*60*60*1000))
-      weekNum = Math.ceil(days/7)
-    }
+    let dateA = (1 + (weekNum - 1) * 7)
+    console.log(weekNum,year,dateA)
 
-    weekNum += weekInc;
-
-    let date = (1 + (weekNum - 1) * 7)
     for(let i=1;i<8;i++){
-      newDate = new Date(year,0,date+i)
+      newDate = new Date(year,0,dateA+i) // change year here
       weekDays.push(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`)
     }
 
+    console.log(weekNum)
+
     setWeek(weekNum)
+
+    if(weekNum == 0){
+      setWeek(52)
+      setYear(year-1)
+    }
+    if(weekNum > 52){
+      setWeek(1)
+      setYear(year+1)
+    }
+
     setWeekDates(weekDays)
     setDate(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`)
   }
 
   useEffect(() => {
     getWeek()
-    setWeekInc(0)
-  },[weekInc])
+  },[week])
+
 
   return (
     <div id="timetable" data-testid="timetable">
       <div className="week-nav">
-
-        <button id="left" onClick={(() => changeWeek(-1))} >{"<"}</button>
-
-        <p id="week-number">Week {week}</p>
-
-        <button id="right" onClick={(() => changeWeek(1))} >{">"}</button>
-
+        <button id="left" onClick={(() => setWeek(week-1))} >{"<"}</button>
+        <div className="week-year">
+          <p>{year}</p>
+          <p id="week-number">Week {resolveWeek()}</p>
+        </div>
+        <button id="right" onClick={(() => setWeek(week+1))} >{">"}</button>
       </div>
       <Days days={days} week={week} date={date} weekDates={weekDates}/>
       <div id="table">
