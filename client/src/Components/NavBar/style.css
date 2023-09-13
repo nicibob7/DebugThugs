@@ -47,6 +47,11 @@
     background-color: transparent;
 }
 
+/* SAFARI version of nth child */
+.mainNav a:nth-of-type(1)::before{
+    background-color: transparent;
+}
+
 @media screen and (max-width:650px){
     #NavBar .loginNav{
         position: relative;
