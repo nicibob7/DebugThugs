@@ -1,83 +1,83 @@
-const { ObjectId } = require("mongodb");
+const { ObjectId } = require('mongodb');
 const client = require('../database/setup');
 
 class User {
     constructor(data) {
-        this.id = data.id,
-        this.name = data.name,
-        this.email = data.email,
-        this.password = data.password
+        (this.id = data._id),
+            (this.name = data.name),
+            (this.email = data.email),
+            (this.password = data.password);
     }
 
     static async getAll() {
         await client.connect();
-        const response = await client.db("revision_app").collection("users").find({})
-        const allValues = await response.toArray()
+        const response = await client.db('revision_app').collection('users').find({});
+        const allValues = await response.toArray();
         return allValues;
     }
 
     static async getById(idx) {
         await client.connect();
-        const id = new ObjectId(idx)
-        const response = await client.db("revision_app").collection("users").find({
+        const id = new ObjectId(idx);
+        const response = await client.db('revision_app').collection('users').find({
             _id: id,
-        })
-        const value = await response.toArray()
-        const user = new User(value[0])
-        user['id'] = id
-        return user
+        });
+        const value = await response.toArray();
+        const user = new User(value[0]);
+        user['id'] = id;
+        return user;
     }
 
     static async getByUser(email) {
         await client.connect();
-        const response = await client.db("revision_app").collection("users").find({
-            email: email
-        })
-        const value = await response.toArray()
-        console.log('value:', value)
-        const user = new User(value[0])
-        return user
+        const response = await client.db('revision_app').collection('users').find({
+            email: email,
+        });
+        const value = await response.toArray();
+        const user = new User(value[0]);
+        return user;
     }
 
     static async create({ name, email, password }) {
         await client.connect();
-        const response = await client.db("revision_app").collection("users").insertOne({
+        const response = await client.db('revision_app').collection('users').insertOne({
             name: name,
             email: email,
-            password: password
-        })
-        return "User created"
+            password: password,
+        });
+        return 'User created';
     }
 
-    static async addTask({email, date, description}) {
-        console.log(email, date, description)
-        try{
-            await client.connect()
-            const response = await client.db("revision_app").collection("users").find({
-                email: email
-            })
-            const value = await response.toArray()
-            if(!value[0].tasks){
-                value[0].tasks = []
+    static async addTask({ email, date, description }) {
+        console.log(email, date, description);
+        try {
+            await client.connect();
+            const response = await client.db('revision_app').collection('users').find({
+                email: email,
+            });
+            const value = await response.toArray();
+            if (!value[0].tasks) {
+                value[0].tasks = [];
             }
-            const task = value[0].tasks
-            const response2 = await client.db("revision_app").collection("users").updateOne(
-                {email: email},
-                {
-                    $set: { tasks: [...task, {date: date, description: description}] }
-                }
-            )
-            if(response2.modifiedCount === 1){
-                return "Updated!"
+            const task = value[0].tasks;
+            const response2 = await client
+                .db('revision_app')
+                .collection('users')
+                .updateOne(
+                    { email: email },
+                    {
+                        $set: { tasks: [...task, { date: date, description: description }] },
+                    }
+                );
+            if (response2.modifiedCount === 1) {
+                return 'Updated!';
+            } else {
+                throw new Error('Update failed');
             }
-            else{
-                throw new Error("Update failed")
-            }
-        }
-        catch(err){
-            return ({ err: err.message })
+        } catch (err) {
+            return { err: err.message };
         }
     }
 }
 
-module.exports = User
+module.exports = User;

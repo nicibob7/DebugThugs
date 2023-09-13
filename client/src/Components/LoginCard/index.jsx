@@ -26,6 +26,7 @@ const LoginCard = () => {
         try {
             const response = await axios.post('http://localhost:3000/users/login', data);
             if (response.status === 200) {
+                localStorage.setItem('token', response.data.token);
                 navigate('/');
             }
         } catch (error) {
