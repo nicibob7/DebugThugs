@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import {
     HomePage,
@@ -10,22 +10,45 @@ import {
 } from './Pages/export';
 import { NavBar } from './Components/export';
 import './App.css';
-import { AuthProvider } from './Contexts';
+import { AuthProvider, useAuth } from './Contexts';
+import ProtectedRoute from './routes';
+import axios from 'axios';
 
 function App() {
+    const { user, setUser } = useAuth();
+
+    const handleRefresh = async () => {
+        const token = localStorage.getItem('token');
+        const options = {
+            headers: {
+                Authorization: token,
+            },
+        };
+        const response = await axios.get('http://localhost:3000/users/authenticate', options);
+        await setUser(response.data);
+    };
+
+    useEffect(async () => {
+        if (!user) {
+            await handleRefresh();
+        }
+    }, []);
+
     return (
-        <AuthProvider>
-            <Routes>
-                <Route path="/" element={<NavBar />}>
-                    <Route index element={<HomePage />} />
-                    <Route path="timetable" element={<TimetablePage />} />
-                    <Route path="profile" element={<ProfilePage />} />
+        <Routes>
+            <Route path="/" element={<NavBar />}>
+                <Route index element={<HomePage />} />
+                <Route path="timetable" element={<ProtectedRoute redirectTo="/login" />}>
+                    <Route index element={<TimetablePage />} />
                 </Route>
-                <Route path="login" element={<LoginPage />} />
-                <Route path="register" element={<RegisterPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-        </AuthProvider>
+                <Route path="profile" element={<ProtectedRoute redirectTo="/login" />}>
+                    <Route index element={<ProfilePage />} />
+                </Route>
+            </Route>
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+        </Routes>
     );
 }
 
