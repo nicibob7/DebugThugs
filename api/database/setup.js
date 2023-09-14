@@ -5,7 +5,7 @@ const { MongoClient } = require("mongodb");
 // const connect_url = process.env.DB_CONNECT (for remote database, replace in the .env)
 
 //  local connection url
-const connect_url = process.env.DB_URL
+const connect_url = process.env.MONGO_URI
 // const connect_url = "mongodb://127.0.0.1:27017/debug_thugs_db"
 console.log(connect_url)
 
