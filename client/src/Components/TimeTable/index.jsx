@@ -46,14 +46,11 @@ const TimeTable = () => {
     let newDate;
 
     let dateA = (1 + (weekNum - 1) * 7)
-    console.log(weekNum,year,dateA)
 
     for(let i=1;i<8;i++){
       newDate = new Date(year,0,dateA+i) // change year here
       weekDays.push(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`)
     }
-
-    console.log(weekNum)
 
     setWeek(weekNum)
 
@@ -67,6 +64,7 @@ const TimeTable = () => {
     }
 
     setWeekDates(weekDays)
+
     setDate(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`)
   }
 

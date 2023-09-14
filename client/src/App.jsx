@@ -28,9 +28,9 @@ function App() {
         await setUser(response.data);
     };
 
-    useEffect(async () => {
+    useEffect(() => {
         if (!user) {
-            await handleRefresh();
+            handleRefresh();
         }
     }, []);
 
