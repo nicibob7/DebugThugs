@@ -34,6 +34,15 @@ class Token {
         const tokenObj = new Token(value[0]);
         return tokenObj;
     }
+
+    static async destroy(data) {
+        await client.connect()
+        const token = data.token
+        const response = await client.db('revision_app').collection('tokens').deleteOne({
+            token: token
+        })
+        return 'Token deleted'
+    }
 }
 
 module.exports = Token;
