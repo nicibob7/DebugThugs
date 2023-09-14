@@ -35,7 +35,7 @@ function App() {
         if (!user) {
             handleRefresh();
         }
-    }, []);
+    }, [user]);
 
     return (
         <Routes>
