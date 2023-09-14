@@ -53,17 +53,30 @@ const RegisterCard = () => {
                     <div>
                         <label htmlFor="name">Name</label>
                         <br />
-                        <input type="text" name="name" value={name} onChange={handleName} />
+                        <input
+                            role="input"
+                            type="text"
+                            name="name"
+                            value={name}
+                            onChange={handleName}
+                        />
                     </div>
                     <div>
                         <label htmlFor="email">Email</label>
                         <br />
-                        <input type="email" name="email" value={email} onChange={handleEmail} />
+                        <input
+                            role="input"
+                            type="email"
+                            name="email"
+                            value={email}
+                            onChange={handleEmail}
+                        />
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
                         <br />
                         <input
+                            role="input"
                             type="password"
                             name="password"
                             value={password}
@@ -73,7 +86,7 @@ const RegisterCard = () => {
                     </div>
                 </div>
                 <div>
-                    <button className="register-button" type="submit">
+                    <button role="button" className="register-button" type="submit">
                         Register
                     </button>
                 </div>

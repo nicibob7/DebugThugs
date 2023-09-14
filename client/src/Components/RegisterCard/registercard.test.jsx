@@ -1,13 +1,15 @@
 import React from 'react';
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { BrowserRouter } from 'react-router-dom';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { screen, render, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import matchers from '@testing-library/jest-dom/matchers';
 expect.extend(matchers);
 
+import axios from 'axios';
+
 import RegisterCard from '.';
-import { BrowserRouter } from 'react-router-dom';
 
 describe('RegisterCard component', () => {
     beforeEach(() => {
@@ -21,6 +23,16 @@ describe('RegisterCard component', () => {
     it('renders a register form', () => {
         const form = screen.getByRole('form');
         expect(form).toBeInTheDocument();
+    });
+
+    it('renders a register button', () => {
+        const button = screen.getByRole('button');
+        expect(button).toBeInTheDocument();
+    });
+
+    it('renders three inputs', () => {
+        const inputs = screen.getAllByRole('input');
+        expect(inputs.length).toEqual(3);
     });
 
     afterEach(() => {
