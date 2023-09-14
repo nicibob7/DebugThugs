@@ -4,6 +4,9 @@ const { ObjectId } = require("mongodb");
 class Entry {
     constructor(data) {
         this.id = data.id
+        this.weekNum = data.weekNum
+        this.day = data.day
+        this.time = data.time
         this.content = data.content
     }
 
@@ -26,21 +29,13 @@ class Entry {
         return entry
     }
 
-    static async create({content}) {
-        const currentDate = new Date();
-        const formatting = {
-            timeZone: "Europe/London",
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-        }
-        const date = currentDate.toLocaleString("en-GB", formatting)
+    static async create({weekNum, day, time, content}) {
         try {
             await client.connect()
             const response = await client.db("revision_app").collection("entries").insertOne({
-                date: date,
+                weekNum: weekNum,
+                day: day,
+                time: time,
                 content: content
             })
             return response
