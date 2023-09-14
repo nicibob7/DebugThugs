@@ -1,20 +1,28 @@
 import React, {useState, useEffect} from 'react'
 import "./style.css"
-const InputForm = ({ setInputActive, dates, cell}) => {
+
+const InputForm = ({ times, setInputActive, dates, cell}) => {
     const [content, setContent] = useState("")
     const [entries, setEntries] = useState([])
+
+    // const [hours,setHours] = useState([...Array(24).keys()])
+    // const [minutes,setMinutes] = useState([...Array(60).keys()])
+
     const handleInput = (text) => {
         setContent(text.target.value)
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
+
         const form = new FormData(e.target)
+
         const options = {
             method: "POST",
             body: JSON.stringify({
                 weekNum: cell.weekNum,
                 day: cell.day,
-                time: cell.time,
+                time: cell.time.split(" - ")[0],
                 content: form.get("content")
             }),
             headers: {
@@ -22,7 +30,6 @@ const InputForm = ({ setInputActive, dates, cell}) => {
                 "Content-Type": "application/json"
             }
         }
-        console.log(cell.day,cell.time,cell.weekNum,form.get("content"))
         const resp = await fetch("https://debugthugsapi.onrender.com/timetable",options)
         if(resp.status === 201){
             setContent("")
@@ -30,10 +37,12 @@ const InputForm = ({ setInputActive, dates, cell}) => {
         }else{
             console.log("IDK")
         }
+
     }
+
     const resolveDay = () => {
         switch (cell.day) {
-            case "Monday":
+            case "Monday": 
                 return 0
             case "Tuesday":
                 return 1
@@ -55,9 +64,12 @@ const InputForm = ({ setInputActive, dates, cell}) => {
         const entries = await fetch("https://debugthugsapi.onrender.com/timetable")
         const resp = await entries.json()
     }
+
     useEffect(() => {
         getEntries()
+        
     },[])
+
   return (
     <>
     <div id="overlay">
@@ -66,9 +78,14 @@ const InputForm = ({ setInputActive, dates, cell}) => {
             <span id="date">{dates[resolveDay()]}</span>
             <p className="prompt"> Add a new entry: </p>
             <form onSubmit={handleSubmit} data-testid="form">
-                <input type="text" id="input" name="content" value={content} onChange={handleInput} placeholder="Sample text" />
+                <div id="identifiers">
+                <span id="date">{dates[resolveDay()]}<br></br>{cell.time}</span>
+
+                </div>
+                <input type="text" id="input" name="content" value={content} onChange={handleInput} placeholder="Add to your timetable" />
                 <button type="submit">Submit</button>
             </form>
+
         </div>
     </div>
     </>

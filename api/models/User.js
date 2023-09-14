@@ -48,6 +48,7 @@ class User {
         return 'User created';
     }
 
+
     static async addTask({ email, date, description }) {
         console.log(email, date, description);
         try {

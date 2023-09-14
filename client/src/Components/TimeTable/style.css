@@ -24,7 +24,7 @@ border-right: solid black 1px;
 border: solid black 1px;
 border-right: none;
 border-radius: 10px 0px 0px 10px;
-height: 880px;
+height: 885px;
 }
 
 #days>*{
@@ -78,8 +78,8 @@ padding: 5px;
 
 #content {
 display: grid;
-height: 880px;
-background-color: ivory;
+/* height: 880px; */
+background-color: rgb(216, 216, 211);
 border-radius: 0px 0px 10px 0px;
 border: solid black 2px;
 }
@@ -96,6 +96,7 @@ text-align: center;
 width: 100px;
 height: 110px;
 padding: 5px;
+font-size: 1.1rem;
 }
 
 .row {
@@ -104,7 +105,7 @@ display: flex;
 }
 
 .selected-box{
-background-color: grey;
+background-color: rgb(255, 255, 255);
 }
 
 .week-nav{
@@ -136,6 +137,8 @@ background-color: grey;
   align-items: center;
   cursor: pointer;
   border: none;
+  box-shadow: 3px 3px 2px black;
+
 }
 
 .week-year{
@@ -146,4 +149,32 @@ background-color: grey;
 
 #week-number{
   font-size: 1.4rem;
+}
+
+#refresh{
+  font-size: 1.5rem;
+  background-color: var(--DeepCove);
+  color: white;
+  padding: 8px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 4px 3px 2px black;
+  cursor: pointer;
+}
+
+#left,
+#right,
+#refresh{
+  transition: ease-in-out 0.1s;
+
+}
+
+#left:hover,
+#right:hover,
+#refresh:hover{
+  background-color: var(--PuertoRico);
+  color: black;
+  box-shadow: var(--PuertoRico) 0px 0px 5px 1px ;
+  filter: brightness(1.1);
+  transition: ease-in-out 0.1s;
 }

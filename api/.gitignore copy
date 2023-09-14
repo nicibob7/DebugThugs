@@ -1,9 +1,0 @@
-.DS_Store
-node_modules
-package-lock.json
-.coverage
-build
-dist
-.env
-dockernotes.md
-/spares
