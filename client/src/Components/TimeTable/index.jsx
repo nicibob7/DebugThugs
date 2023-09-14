@@ -20,8 +20,8 @@ const TimeTable = () => {
   const [date,setDate] = useState("")
   const [cell, setCell] = useState({ day: "", time: "", weekNum:"" });
   const [inputActive, setInputActive] = useState(false)
-  const [entries, setEntries] = useState([])
 
+  // Gets the cell information when user clicks and sets active cell
   const handleClick = (day, time, weekNum) => {
     setCell({ day, time, weekNum });
     setInputActive(true)
@@ -40,12 +40,14 @@ const TimeTable = () => {
     let weekNum = week;
     let newDate;
     let dateA = (1 + (weekNum - 1) * 7)
-    console.log(weekNum,year,dateA)
+    // console.log(weekNum,year,dateA)
+
     for(let i=1;i<8;i++){
       newDate = new Date(year,0,dateA+i) // change year here
       weekDays.push(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`)
     }
-    console.log(weekNum)
+    // console.log(weekNum)
+    
     setWeek(weekNum)
     if(weekNum == 0){
       setWeek(52)
@@ -59,21 +61,11 @@ const TimeTable = () => {
     setDate(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`)
   }
 
-  async function getEntries() {
-    try {
-        const response = await fetch("http://localhost:3000/timetable")
-        const data = await response.json()
-        const arr = data.entry
-        setEntries(arr)
-    } catch (error) {
-        console.log(error.message)
-    }
-}
+
   useEffect(() => {
     getWeek()
-    getEntries()
   },[week])
-  console.log(cell)
+  // console.log(cell)
 
   return (
     <div id="timetable" data-testid="timetable">
@@ -91,7 +83,7 @@ const TimeTable = () => {
       <Days days={days} week={week} date={date} weekDates={weekDates}/>
       <div id="table">
         <Times timeSlots={timeSlots} cell={cell} />
-        <TableContent days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} entries={entries}/>
+        <TableContent days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} />
       </div>
     </div>
   );
