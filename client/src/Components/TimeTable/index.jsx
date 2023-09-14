@@ -20,7 +20,21 @@ const TimeTable = () => {
   const [date, setDate] = useState("")
   const [cell, setCell] = useState({ day: "", time: "", weekNum: "" });
   const [inputActive, setInputActive] = useState(false)
+  const [array, setArray] = useState([])
 
+  async function getTimeTable() {
+    axios.get("http://localhost:3000/timetable")
+    .then(response => {
+      const data = response.data
+      const arr = data.entry
+      setArray(arr)
+    })
+  }
+
+  function displayEntries() {
+    return array
+      .filter(e => e.weekNum == week)
+  }
 
   // Gets the cell information when user clicks and sets active cell
   const handleClick = (day, time, weekNum) => {
@@ -66,8 +80,11 @@ const TimeTable = () => {
 
   useEffect(() => {
     getWeek()
+    getTimeTable()
+    displayEntries()
   },[week])
   // console.log(cell)
+  console.log(displayEntries())
 
   return (
     <div id="timetable" data-testid="timetable">
