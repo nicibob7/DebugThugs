@@ -87,6 +87,24 @@ const login = async (req, res) => {
     }
 };
 
+const logout = async (req, res) => {
+    const data = req.headers['token']
+
+    try {
+        const token = await Token.getOneByToken(data)
+        const response = await Token.destroy(token)
+        res.status(204).json({
+            success: true,
+            data: response
+        })
+    } catch(err) {
+        res.status(403).json({
+            success: false,
+            error: err.message
+        })
+    }
+}
+
 const addTask = async (req, res) => {
     const data = req.body;
     try {
@@ -102,4 +120,4 @@ const addTask = async (req, res) => {
     }
 };
 
-module.exports = { index, show, register, login, addTask, getUserByToken };
+module.exports = { index, show, register, login, addTask, getUserByToken, logout };
