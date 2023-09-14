@@ -26,7 +26,7 @@ const LoginCard = () => {
             password: form.get('password'),
         };
         try {
-            const response = await axios.post('http://localhost:3000/users/login', data);
+            const response = await axios.post('https://debugthugsapi.onrender.com/users/login', data);
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
                 const token = localStorage.getItem('token');
@@ -36,7 +36,7 @@ const LoginCard = () => {
                     },
                 };
                 const response2 = await axios.get(
-                    'http://localhost:3000/users/authenticate',
+                    'https://debugthugsapi.onrender.com/users/authenticate',
                     options
                 );
                 setUser(response2.data);
