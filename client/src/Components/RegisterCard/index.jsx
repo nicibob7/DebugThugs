@@ -36,7 +36,7 @@ const RegisterCard = () => {
             },
         };
 
-        const response = await fetch('http://localhost:3000/users/register', options);
+        const response = await fetch('https://debugthugsapi.onrender.com/users/register', options);
 
         if (response.status === 201) {
             navigate('/login');

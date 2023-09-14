@@ -26,7 +26,7 @@ function App() {
                     Authorization: token,
                 },
             };
-            const response = await axios.get('http://localhost:3000/users/authenticate', options);
+            const response = await axios.get('https://debugthugsapi.onrender.com/users/authenticate', options);
             await setUser(response.data);
         }
     };
