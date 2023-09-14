@@ -10,7 +10,7 @@ import {
 } from './Pages/export';
 import { NavBar } from './Components/export';
 import './App.css';
-import { AuthProvider, useAuth } from './Contexts';
+import { useAuth } from './Contexts';
 import ProtectedRoute from './routes';
 import axios from 'axios';
 
@@ -35,7 +35,7 @@ function App() {
         if (!user) {
             handleRefresh();
         }
-    }, []);
+    }, [user]);
 
     return (
         <Routes>
