@@ -15,17 +15,19 @@ const TimeTable = () => {
     return timeSlots;
   };
   const [year, setYear] = useState(new Date().getFullYear()) // stores current year
-  const [week,setWeek] = useState((Math.ceil(Math.floor(((new Date()) - (new Date(year,0,1))) / (24*60*60*1000)/7)+1))%52) // initalize week with current week number
-  const [weekDates,setWeekDates] = useState([]) // stores dates of week
-  const [date,setDate] = useState("")
-  const [cell, setCell] = useState({ day: "", time: "", weekNum:"" });
+  const [week, setWeek] = useState((Math.ceil(Math.floor(((new Date()) - (new Date(year,0,1))) / (24*60*60*1000)/7)+1))%52) // initalize week with current week number
+  const [weekDates, setWeekDates] = useState([]) // stores dates of week
+  const [date, setDate] = useState("")
+  const [cell, setCell] = useState({ day: "", time: "", weekNum: "" });
   const [inputActive, setInputActive] = useState(false)
+
 
   // Gets the cell information when user clicks and sets active cell
   const handleClick = (day, time, weekNum) => {
     setCell({ day, time, weekNum });
     setInputActive(true)
   };
+
   const resolveWeek = () => {
     if (week%52 == 0){
       return 52
@@ -70,7 +72,7 @@ const TimeTable = () => {
   return (
     <div id="timetable" data-testid="timetable">
       {inputActive && (
-        <InputForm />
+        <InputForm setInputActive={setInputActive} dates={weekDates} cell={cell}/>
       )}
       <div className="week-nav">
         <button id="left" onClick={(() => setWeek(week-1))} >{"<"}</button>

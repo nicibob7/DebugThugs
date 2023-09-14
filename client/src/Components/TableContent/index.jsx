@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
+import axios from "axios"
 
 const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
-  const [entries, setEntries] = useState([]);
-  const [cellContent, setCellContent] = useState("");
+  const [entries, setEntries] = useState([])
+  const [cellContent, setCellContent] = useState("")
 
   // Fetches all of the entries when the page is loaded & updated
   async function getEntries() {
     try {
-      const response = await fetch("http://localhost:3000/timetable");
-      const data = await response.json();
-      const arr = data.entry;
-      setEntries(arr);
+      axios.get("http://localhost:3000/timetable")
+        .then(response => {
+          const data = response.data
+          const arr = data.entry
+          setEntries(arr)
+        })
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
     }
   }
 
   function populateTable() {
+    console.log("Cell:", cell)
+
     // Find the matching entry for the current cell
     const matchedEntry = entries.find((entry) => {
-      const cellTime = cell.time.split(" - ");
-      const startTime = cellTime[0];
-      const endTime = cellTime[1];
-  
+      const cellTime = cell.time.split(" - ")
+      const startTime = cellTime[0]
+      const endTime = cellTime[1]
+
       return (
         entry.weekNum === weekNum &&
         entry.day === cell.day &&
@@ -30,33 +35,34 @@ const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
         entry.time <= endTime
       );
     });
-  
-    // Set the content for the cell
-    if (matchedEntry) {
-      setCellContent(matchedEntry.content);
-    } else {
-      setCellContent("");
-    }
 
+    console.log("Matched Entry:", matchedEntry)
+
+    // Set the content for the cell
+    if (matchedEntry) { 
+      setCellContent(matchedEntry.content)
+    } else {
+      setCellContent("")
+    }
   }
 
   useEffect(() => {
-    getEntries();
-  }, []);
+    getEntries()
+  }, [])
 
   useEffect(() => {
     populateTable()
-  }, [cell, weekNum, entries]);
+  }, [cell, weekNum, entries])
 
   return (
     <div id="content">
       {days.map((day, dayIndex) => (
         <div key={dayIndex} className="row">
           {timeSlots().map((time, timeIndex) => {
-            const content =
-              cell.day === day &&
-              cell.time === time &&
-              cellContent !== "" ? cellContent : "";
+          const content =
+            cell.day === day &&
+            cell.time === time &&
+            cellContent !== "" ? cellContent : "";
 
             return (
               <div
@@ -65,7 +71,8 @@ const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
                   cell.day === day && cell.time === time ? "selected-box" : ""
                 }`}
                 onClick={() => handleClick(day, time, weekNum)}
-              > {content}
+              >
+                {content}
               </div>
             );
           })}
