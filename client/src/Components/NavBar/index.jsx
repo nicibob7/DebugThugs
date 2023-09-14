@@ -1,29 +1,36 @@
 import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import './style.css';
 import { useAuth } from '../../Contexts';
 import axios from 'axios';
 
 const NavBar = () => {
-    const style = { textDecoration: 'none', fontWeight: 'bold', color: 'color: var(--PuertoRico)' };
+    // const style = { textDecoration: 'none', color: 'color: var(--PuertoRico)' };
     const { user, setUser } = useAuth();
+
+   const navigate = useNavigate()
+
+    const handleLogin = async () => {
+        navigate('/login')
+    }
 
     const handleLogout = async () => {
         const tokenStr = localStorage.getItem('token')
-        
+    
         const data = {
             headers: {
                 token: tokenStr
             }
         }
         try {
-            const response = await axios.delete('http://localhost:3000/users/logout', data)
-        
+            const response = await axios.delete('https://debugthugsapi.onrender.com/users/logout', data)
+            localStorage.removeItem('token')
+            await setUser('')
         } catch(err) {
             console.log(err.message)
         }
-        localStorage.removeItem('token')
-        await setUser('')
+        
+        
         // axios req to delete token
     }
 
@@ -31,25 +38,26 @@ const NavBar = () => {
         <>
             <div id="NavBar" data-testid="wrapper">
                 <div className="mainNav">
-                    <NavLink to="/" style={style}>
+                    <NavLink to="/">
                         {/* Home |{' '} */}
                         Home
                     </NavLink>
-                    <NavLink to="/timetable" style={style}>
+                    <NavLink to="/timetable">
                         {/* Timetable{' '} */}
                         Timetable
                     </NavLink>
                 </div>
                 <div className="loginNav">
                     {user ? (<>
-                        <NavLink to="/profile" style={style}>
+                        <NavLink to="/profile">
                             {/* Profile |{' '} */}
                             {user.name}
-                        </NavLink><button onClick={handleLogout}>Logout</button></>
+                        </NavLink><button className='logout-btn' onClick={handleLogout}>Logout</button></>
                     ) : (
-                        <NavLink to="/login" style={style}>
-                            Login
-                        </NavLink>
+                        // <NavLink to="/login">
+                        //     Login
+                        // </NavLink>
+                        <button className="login-btn" onClick={handleLogin}>Login</button>
                     )}
                 </div>
             </div>

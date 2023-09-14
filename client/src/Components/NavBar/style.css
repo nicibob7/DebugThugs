@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates&family=Poppins&family=Raleway:wght@300;400&family=Roboto:wght@100;300;500&display=swap');
+
+
 :root {
     --DeepCove: #071c42;
     --PuertoRico: #3dcab1;
+}
+body {
+    font-family: 'Poppins', sans-serif;
 }
 #NavBar {
     position: relative;
@@ -10,27 +16,73 @@
     min-width: 100vw;
     min-height: 3rem;
     background-color: var(--DeepCove);
-    color: var(--PuertoRico);
+    color: #cdfff6;
     font-size: 2rem;
-    border-bottom: solid var(--PuertoRico) 1rem;
+    border-bottom: solid var(--PuertoRico) 0.5rem;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
 }
 #NavBar .mainNav {
     display: flex;
     flex-direction: row;
-    margin-left: 15vw;
+    margin-left: 16vw;
     padding: 10px;
-    gap: 1em;
+    gap: 2em;
 }
 #NavBar .loginNav {
+    display: flex;
     /* position: sticky; */
     /* margin-left: 50vw; */
     position: absolute;
     right: 50px;
     padding: 10px;
+    
 }
 
 #NavBar a{
+    display: flex;
     position: relative;
+    text-decoration:  none;
+    color: #a8ffef;
+    transition: 0.3s ease;
+}
+
+#NavBar a:hover{
+    display: flex;
+    position: relative;
+    color: beige;
+}
+
+.logout-btn {
+    position: relative;
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+    border-radius: 20px;
+    border: none;
+    transition: 0.3s;
+    align-items: center;
+    padding: 5px 20px 5px 20px;
+    font-weight: 300;
+    background-color: #a8ffef;
+}
+#NavBar button:hover {
+    background-color: var(--PuertoRico);
+    cursor: pointer;
+    color: white;
+}
+.login-btn {
+    position: relative;
+    display: flex;
+    margin-left: 20px;
+    align-items: center;
+    border-radius: 20px;
+    border: none;
+    transition: 0.3s;
+    align-items: center;
+    padding: 10px 20px 10px 20px;
+    font-weight: 300;
+    background-color: #a8ffef;
 }
 
 #NavBar a::before{

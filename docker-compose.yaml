@@ -27,9 +27,10 @@ services:
       - DB_URL=mongodb+srv://emptybagelman:w3zIIdhUam9BfLMw@lap3.noloryo.mongodb.net/revision_app?retryWrites=true&w=majority
       # - DB_URL=mongodb://admin:secret@db:27017/debug_thugs_db?authSource=admin
       - PORT=5000
+
       - BCRYPT_SALT_ROUNDS=12
     ports:
-      - 5000:5000
+      - 3000:3000
     volumes:
       - type: bind
         source: ./api
