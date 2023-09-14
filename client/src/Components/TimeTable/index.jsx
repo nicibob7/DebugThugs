@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios"
 import { Days, Times, TableContent, InputForm } from "../export"
 import "./style.css";
+import * as ReactDOM from "react-dom"
 
 const TimeTable = () => {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const times = ["00:00","02:00","04:00","06:00","08:00","10:00","12:00","14:00","16:00","18:00","20:00","22:00"]
+  
   const timeSlots = () => {
     const timeSlots = [];
     for (let hour = 0; hour < 24; hour += 2) {
@@ -19,6 +23,18 @@ const TimeTable = () => {
   const [date,setDate] = useState("")
   const [cell, setCell] = useState({ day: "", time: "", weekNum:"" });
   const [inputActive, setInputActive] = useState(false)
+  const [array,setArray] = useState([])
+  const dayRefs = useRef([])
+
+  async function getTimetable() {
+    const emptyArray = []
+    axios.get("https://debugthugsapi.onrender.com/timetable")
+    .then(resp => {
+      const data = resp.data.entry
+      const arr = data.filter(e => e.weekNum == week)
+      setArray(arr)
+    })
+  }
 
   // Gets the cell information when user clicks and sets active cell
   const handleClick = (day, time, weekNum) => {
@@ -59,18 +75,72 @@ const TimeTable = () => {
     setWeekDates(weekDays)
 
     setDate(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`)
+    try {
+    } catch (error) {
+      
+    }
   }
 
+  function pruneTable() {
+    const dR = dayRefs.current
+    for(let idx in dR){
+      const row = dR[idx]
+      console.log(row.childNodes[0])
+
+      // for(let childIdx in row){
+      //   console.log(childIdx)
+      // }
+      // for(let childIdx in row){
+      //   console.log(row)
+      // }
+    }
+  }
+
+  function loadEntries() {
+    for(let entry in array){
+      const e = array[entry]
+      const dayNum = resolveDay(e)
+      const idx = times.indexOf(e.time)
+      if(times.includes(e.time)){
+        dayRefs.current[dayNum].childNodes[idx].textContent = e.content
+        // console.log(dayRefs.current[dayNum].childNodes[idx])
+      }
+    }
+  }
+
+  const resolveDay = (entry) => {
+    switch (entry.day) {
+        case "Monday": 
+            return 0
+        case "Tuesday":
+            return 1
+        case "Wednesday":
+            return 2
+        case "Thursday":
+            return 3
+        case "Friday":
+            return 4
+        case "Saturday":
+            return 5
+        case "Sunday":
+            return 6
+        default:
+            return 0
+    }
+  }
 
   useEffect(() => {
     getWeek()
+    getTimetable()
+    pruneTable()
+    loadEntries()
   },[week])
   // console.log(cell)
 
   return (
     <div id="timetable" data-testid="timetable">
       {inputActive && (
-        <InputForm />
+        <InputForm times={times} setInputActive={setInputActive} dates={weekDates} cell={cell}/>
       )}
       <div className="week-nav">
         <button id="left" onClick={(() => setWeek(week-1))} >{"<"}</button>
@@ -83,7 +153,7 @@ const TimeTable = () => {
       <Days days={days} week={week} date={date} weekDates={weekDates}/>
       <div id="table">
         <Times timeSlots={timeSlots} cell={cell} />
-        <TableContent days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} />
+        <TableContent dayRefs={dayRefs} days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} />
       </div>
     </div>
   );

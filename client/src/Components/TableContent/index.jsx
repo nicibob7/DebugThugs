@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
+const TableContent = ({ dayRefs, days, cell, weekNum, timeSlots, handleClick }) => {
   const [entries, setEntries] = useState([]);
   const [cellContent, setCellContent] = useState("");
 
   // Fetches all of the entries when the page is loaded & updated
   async function getEntries() {
     try {
-      const response = await fetch("http://localhost:3000/timetable");
+      const response = await fetch("https://debugthugsapi.onrender.com/timetable");
       const data = await response.json();
       const arr = data.entry;
       setEntries(arr);
@@ -48,10 +48,12 @@ const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
     populateTable()
   }, [cell, weekNum, entries]);
 
+
+
   return (
     <div id="content">
       {days.map((day, dayIndex) => (
-        <div key={dayIndex} className="row">
+        <div key={dayIndex} className="row" ref={ el => dayRefs.current[dayIndex] = el}>
           {timeSlots().map((time, timeIndex) => {
             const content =
               cell.day === day &&

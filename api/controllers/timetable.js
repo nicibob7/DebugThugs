@@ -11,6 +11,7 @@ const index = async(req, res) => {
 const create = async(req, res) => {
     try {
         const data = req.body;
+        console.log(data)
         const entry = await Entry.create(data)
         res.status(201).send({data: entry})
     } catch (error) {
