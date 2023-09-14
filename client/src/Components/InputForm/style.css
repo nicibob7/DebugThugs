@@ -1,0 +1,49 @@
+:root {
+    --DeepCove: #071c42;
+    --PuertoRico: #3dcab1;
+}
+
+#overlay {
+    color: black;
+    background-color: rgba(255,255,240,0.9);
+    position: absolute;
+    z-index: 6;
+    width: 25vw;
+    height: 40vh;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 5px solid black; 
+    border-radius: 25px;
+  }
+  
+  #overlay-content {
+    padding: 2em; 
+  }
+  
+  .prompt {
+    text-align: center;
+    font-size: 33px;
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  
+  #overlay-content input[type="text"] {
+    width: 100%;
+    padding: 0.5em;
+    margin-bottom: 1em; 
+  }
+  
+  #overlay-content button {
+    display: block; 
+    margin-top: 12em;
+    margin-left: 12em;
+    padding: 0.5em 1em; 
+    background-color: var(--PuertoRico); 
+    color: white; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
