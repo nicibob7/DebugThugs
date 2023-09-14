@@ -8,7 +8,7 @@ const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
   // Fetches all of the entries when the page is loaded & updated
   async function getEntries() {
     try {
-      axios.get("http://localhost:3000/timetable")
+      axios.get("https://debugthugsapi.onrender.com/timetable")
         .then(response => {
           const data = response.data
           const arr = data.entry
@@ -58,7 +58,7 @@ const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
     <div id="content">
       {days.map((day, dayIndex) => (
         <div key={dayIndex} className="row">
-          {timeSlots().map((time, timeIndex) => {
+          {timeSlots().map((time, boxIndex) => {
           const content =
             cell.day === day &&
             cell.time === time &&
@@ -66,7 +66,7 @@ const TableContent = ({ days, cell, weekNum, timeSlots, handleClick }) => {
 
             return (
               <div
-                key={timeIndex}
+                key={boxIndex}
                 className={`box ${
                   cell.day === day && cell.time === time ? "selected-box" : ""
                 }`}

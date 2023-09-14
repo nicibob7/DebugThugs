@@ -23,7 +23,7 @@ const InputForm = ({ setInputActive, dates, cell}) => {
             }
         }
         console.log(cell.day,cell.time,cell.weekNum,form.get("content"))
-        const resp = await fetch("http://localhost:3000/timetable",options)
+        const resp = await fetch("https://debugthugsapi.onrender.com/timetable",options)
         if(resp.status === 201){
             setContent("")
             setInputActive(false)
@@ -52,7 +52,7 @@ const InputForm = ({ setInputActive, dates, cell}) => {
         }
     }
     const getEntries = async () => {
-        const entries = await fetch("http://localhost:3000/timetable")
+        const entries = await fetch("https://debugthugsapi.onrender.com/timetable")
         const resp = await entries.json()
     }
     useEffect(() => {

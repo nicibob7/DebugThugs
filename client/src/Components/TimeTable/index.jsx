@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Days, Times, TableContent, InputForm } from "../export"
+import axios from "axios"
 import "./style.css";
 
 const TimeTable = () => {
@@ -22,12 +23,16 @@ const TimeTable = () => {
   const [array, setArray] = useState([])
 
   async function getTimeTable() {
-    axios.get("http://localhost:3000/timetable")
-    .then(response => {
-      const data = response.data
-      const arr = data.entry
-      setArray(arr)
-    })
+    try {
+      axios.get("https://debugthugsapi.onrender.com/timetable")
+      .then(response => {
+        const data = response.data
+        const arr = data.entry
+        setArray(arr)
+      })
+    } catch (error) {
+      
+    }
   }
 
   function displayEntries() {
@@ -40,6 +45,41 @@ const TimeTable = () => {
     setCell({ day, time, weekNum });
     setInputActive(true)
   };
+
+  const resolveDay = (d) => {
+    switch (d.day) {
+        case "Monday":
+            return 0
+        case "Tuesday":
+            return 1
+        case "Wednesday":
+            return 2
+        case "Thursday":
+            return 3
+        case "Friday":
+            return 4
+        case "Saturday":
+            return 5
+        case "Sunday":
+            return 6
+        default:
+            return 0
+    }
+}
+  function loopEntries() {
+    try {
+      return days.map((day) => {
+        array.day === day
+        console.log("line 69: ", day)
+        timeSlots().map((time) => {
+          array.time === time
+          console.log("line 76: ", time)
+        })
+      })
+    } catch (error) {
+      
+    }
+  }
 
   const resolveWeek = () => {
     if (week%52 == 0){
@@ -82,9 +122,10 @@ const TimeTable = () => {
     getWeek()
     getTimeTable()
     displayEntries()
+    loopEntries()
   },[week])
   // console.log(cell)
-  console.log(displayEntries())
+  console.log("Fetched Entries", displayEntries())
 
   return (
     <div id="timetable" data-testid="timetable">
