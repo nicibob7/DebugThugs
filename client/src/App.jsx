@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import {
     HomePage,
     ProfilePage,
@@ -16,16 +16,19 @@ import axios from 'axios';
 
 function App() {
     const { user, setUser } = useAuth();
+    const nav = useNavigate();
 
     const handleRefresh = async () => {
         const token = localStorage.getItem('token');
-        const options = {
-            headers: {
-                Authorization: token,
-            },
-        };
-        const response = await axios.get('http://localhost:3000/users/authenticate', options);
-        await setUser(response.data);
+        if (token) {
+            const options = {
+                headers: {
+                    Authorization: token,
+                },
+            };
+            const response = await axios.get('http://localhost:3000/users/authenticate', options);
+            await setUser(response.data);
+        }
     };
 
     useEffect(() => {
