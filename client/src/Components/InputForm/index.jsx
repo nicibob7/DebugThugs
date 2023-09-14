@@ -30,6 +30,7 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
                 "Content-Type": "application/json"
             }
         }
+
         const resp = await fetch("https://debugthugsapi.onrender.com/timetable",options)
         if(resp.status === 201){
             setContent("")
@@ -60,6 +61,7 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
                 return 0
         }
     }
+
     const getEntries = async () => {
         const entries = await fetch("https://debugthugsapi.onrender.com/timetable")
         const resp = await entries.json()
@@ -75,7 +77,6 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
     <div id="overlay">
         <button id='close' onClick={() => setInputActive(false)}>X</button>
         <div id="overlay-content">
-            <span id="date">{dates[resolveDay()]}</span>
             <p className="prompt"> Add a new entry: </p>
             <form onSubmit={handleSubmit} data-testid="form">
                 <div id="identifiers">
@@ -89,6 +90,8 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
         </div>
     </div>
     </>
+    
   )
 }
+
 export default InputForm

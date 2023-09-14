@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios"
 import { Days, Times, TableContent, InputForm } from "../export"
-import axios from "axios"
 import "./style.css";
 import * as ReactDOM from "react-dom"
 
@@ -137,9 +136,6 @@ const TimeTable = () => {
 
   useEffect(() => {
     getWeek()
-    getTimeTable()
-    displayEntries()
-    loopEntries()
   },[week])
 
   useEffect(() => {
@@ -148,7 +144,6 @@ const TimeTable = () => {
     loadEntries()
   },[week,refresh])
   // console.log(cell)
-  console.log("Fetched Entries", displayEntries())
 
   return (
     <div id="timetable" data-testid="timetable">

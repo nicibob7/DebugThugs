@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import axios from "axios"
+import React, { useState, useEffect } from 'react';
 
 const TableContent = ({ array, dayRefs, days, cell, weekNum, timeSlots, handleClick }) => {
   const [entries, setEntries] = useState([]);
@@ -77,7 +76,7 @@ const TableContent = ({ array, dayRefs, days, cell, weekNum, timeSlots, handleCl
 
             return (
               <div
-                key={boxIndex}
+                key={timeIndex}
                 className={`box ${
                   cell.day === day && cell.time === time ? "selected-box" : ""
                 }`}
