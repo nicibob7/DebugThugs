@@ -21,10 +21,12 @@ const TimeTable = () => {
   const [week,setWeek] = useState((Math.ceil(Math.floor(((new Date()) - (new Date(year,0,1))) / (24*60*60*1000)/7)+1))%52) // initalize week with current week number
   const [weekDates,setWeekDates] = useState([]) // stores dates of week
   const [date,setDate] = useState("")
-  const [cell, setCell] = useState({ day: "", time: "", weekNum:"" });
+  const [cell, setCell] = useState({ day: "", time: "", weekNum:"", content:"" });
   const [inputActive, setInputActive] = useState(false)
   const [array,setArray] = useState([])
   const dayRefs = useRef([])
+
+  const [refresh,setRefresh] = useState(0)
 
   async function getTimetable() {
     const emptyArray = []
@@ -37,10 +39,12 @@ const TimeTable = () => {
   }
 
   // Gets the cell information when user clicks and sets active cell
-  const handleClick = (day, time, weekNum) => {
-    setCell({ day, time, weekNum });
+  const handleClick = (day, time, weekNum,content) => {
+    
+    setCell({ day, time, weekNum,content });
     setInputActive(true)
   };
+  
   const resolveWeek = () => {
     if (week%52 == 0){
       return 52
@@ -85,14 +89,14 @@ const TimeTable = () => {
     const dR = dayRefs.current
     for(let idx in dR){
       const row = dR[idx]
-      console.log(row.childNodes[0])
-
-      // for(let childIdx in row){
-      //   console.log(childIdx)
-      // }
-      // for(let childIdx in row){
-      //   console.log(row)
-      // }
+      for(let i=0;i<12;i++){
+        const box = row.childNodes[i]
+        if(box.textContent > 1){
+          console.log(box)
+        }
+        box.textContent = null
+        box.style.backgroundColor = "rgb(216, 216, 211)"
+      }
     }
   }
 
@@ -103,6 +107,7 @@ const TimeTable = () => {
       const idx = times.indexOf(e.time)
       if(times.includes(e.time)){
         dayRefs.current[dayNum].childNodes[idx].textContent = e.content
+        dayRefs.current[dayNum].childNodes[idx].style.backgroundColor = "white"
         // console.log(dayRefs.current[dayNum].childNodes[idx])
       }
     }
@@ -131,10 +136,13 @@ const TimeTable = () => {
 
   useEffect(() => {
     getWeek()
+  },[week])
+
+  useEffect(() => {
     getTimetable()
     pruneTable()
     loadEntries()
-  },[week])
+  },[week,refresh])
   // console.log(cell)
 
   return (
@@ -149,11 +157,12 @@ const TimeTable = () => {
           <p id="week-number">Week {resolveWeek()}</p>
         </div>
         <button id="right" onClick={(() => setWeek(week+1))} >{">"}</button>
+        <button id="refresh" onClick={() => setRefresh(refresh+1)}>REFRESH</button>
       </div>
       <Days days={days} week={week} date={date} weekDates={weekDates}/>
       <div id="table">
         <Times timeSlots={timeSlots} cell={cell} />
-        <TableContent dayRefs={dayRefs} days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} />
+        <TableContent array={array} dayRefs={dayRefs} days={days} cell={cell} weekNum={week} timeSlots={timeSlots} handleClick={handleClick} />
       </div>
     </div>
   );

@@ -31,8 +31,6 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
             }
         }
 
-        console.log(cell.day,cell.weekNum,cell.time,form.get("content"))
-
         const resp = await fetch("https://debugthugsapi.onrender.com/timetable",options)
         if(resp.status === 201){
             setContent("")
@@ -71,6 +69,7 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
 
     useEffect(() => {
         getEntries()
+        
     },[])
 
   return (
@@ -78,32 +77,16 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
     <div id="overlay">
         <button id='close' onClick={() => setInputActive(false)}>X</button>
         <div id="overlay-content">
-            <span id="date">{dates[resolveDay()]}</span>
             <p className="prompt"> Add a new entry: </p>
             <form onSubmit={handleSubmit} data-testid="form">
-                <input type="text" id="input" name="content" value={content} onChange={handleInput} placeholder="Sample text" />
-                {/* <div className="time-slot">
-                <select name="times" id="hour-dropdown">
-                    <option value={times[0]}>{times[0]}</option>
-                    <option value={times[1]}>{times[1]}</option>
-                    <option value={times[2]}>{times[2]}</option>
-                    <option value={times[3]}>{times[3]}</option>
-                    <option value={times[4]}>{times[4]}</option>
-                    <option value={times[5]}>{times[5]}</option>
-                    <option value={times[6]}>{times[6]}</option>
-                    <option value={times[7]}>{times[7]}</option>
-                    <option value={times[8]}>{times[8]}</option>
-                    <option value={times[9]}>{times[9]}</option>
-                    <option value={times[10]}>{times[10]}</option>
-                    <option value={times[11]}>{times[11]}</option>
-                </select>
-                <select name="minute" id="minute-dropdown">
+                <div id="identifiers">
+                <span id="date">{dates[resolveDay()]}<br></br>{cell.time}</span>
 
-                </select>
-                </div> */}
-
+                </div>
+                <input type="text" id="input" name="content" value={content} onChange={handleInput} placeholder="Add to your timetable" />
                 <button type="submit">Submit</button>
             </form>
+
         </div>
     </div>
     </>
