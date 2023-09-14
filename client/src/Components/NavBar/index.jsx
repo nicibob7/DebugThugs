@@ -5,7 +5,14 @@ import { useAuth } from '../../Contexts';
 
 const NavBar = () => {
     const style = { textDecoration: 'none', fontWeight: 'bold', color: 'color: var(--PuertoRico)' };
-    const { user } = useAuth();
+    const { user, setUser } = useAuth();
+
+    const handleLogout = async () => {
+        localStorage.removeItem('token')
+        await setUser('')
+        // axios req to delete token
+    }
+
     return (
         <>
             <div id="NavBar" data-testid="wrapper">
@@ -20,11 +27,11 @@ const NavBar = () => {
                     </NavLink>
                 </div>
                 <div className="loginNav">
-                    {user ? (
+                    {user ? (<>
                         <NavLink to="/profile" style={style}>
                             {/* Profile |{' '} */}
                             {user.name}
-                        </NavLink>
+                        </NavLink><button onClick={handleLogout}>Logout</button></>
                     ) : (
                         <NavLink to="/login" style={style}>
                             Login

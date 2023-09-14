@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --verbose",
     "dev": "nodemon -L index.js",
-    "seed": "node database/seed.js"
+    "seed": "node database/seed.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",

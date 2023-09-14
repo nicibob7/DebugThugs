@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Days, Times, TableContent, InputForm } from "../export"
-import axios from "axios"
 import "./style.css";
 
 const TimeTable = () => {
@@ -74,6 +73,7 @@ const TimeTable = () => {
       setYear(year+1)
     }
     setWeekDates(weekDays)
+
     setDate(`${newDate.getDate()}/${newDate.getMonth()+1}/${newDate.getFullYear()}`)
   }
 
