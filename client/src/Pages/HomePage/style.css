@@ -1,9 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates&family=Poppins&family=Raleway:wght@300;400&family=Roboto:wght@100;300;500&display=swap');
+
 :root {
     --DeepCove: #071c42;
     --PuertoRico: #3dcab1;
     background-color: var(--DeepCove);
+    font-family: 'Poppins', sans-serif;
 }
-
+h1 {
+    text-align: center;
+    margin: 0;
+}
+h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 20px;
+}
 #sideBanner {
     position: absolute;
     top: 0;
@@ -21,7 +32,7 @@
 
 .home-container{
     display: flex;
-    border: black solid;
+    /* border: black solid; */
     margin: auto;
     /* height: 100%; */
     left: 56.9%;
@@ -36,10 +47,13 @@
 }
 
 .home-wrapper-left {
-    border: black solid;
+    /* border: black solid; */
     box-sizing: border-box;
     /* margin: 20px; */
     width: 40%;
+    background-color: #0B3954;
+    color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .home-wrapper-right {
@@ -52,15 +66,24 @@
     flex-wrap: wrap;
     /* column-gap: 20px; */
     justify-content: space-evenly;
+    background-color: #0B3954;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.h-wrapper-ele img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .h-wrapper-box{
     position: relative;
-    border: black solid;
+    /* border: black solid; */
     box-sizing: border-box;
     width: 50%;
     height: 50%;
     padding: 10px
+    
 }
 
 .h-wrapper-ele {
@@ -69,5 +92,16 @@
     box-sizing: border-box;
     width: 100%;
     height: 100%;
+    padding: 5px;
+    transition: 0.3s ease;
+}
+.h-wrapper-ele:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    filter: grayscale(1);
+}
+p {
+    padding: 15px;
+    overflow: auto;
 }
 
