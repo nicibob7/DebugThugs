@@ -22,7 +22,12 @@ const ProfilePage = () => {
         handleRefresh()
     }, [])
 
-    console.log(user,tasks)
+    try{
+        tasks.filter((task) => task.name == user.name) 
+    }catch(err){
+        console.log(err.message)
+    }
+
 
     let listItems
 
