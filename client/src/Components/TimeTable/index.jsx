@@ -105,7 +105,7 @@ const TimeTable = () => {
   function loadEntries() {
     for(let entry in array){
       const e = array[entry]
-      console.log(e,user)
+      console.log(e)
       if(e.name == user.name){
         const dayNum = resolveDay(e)
         const idx = times.indexOf(e.time)

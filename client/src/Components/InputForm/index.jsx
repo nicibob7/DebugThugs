@@ -25,7 +25,7 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
             method: "POST",
             body: JSON.stringify({
                 weekNum: cell.weekNum,
-                name: user,
+                name: user.name,
                 day: cell.day,
                 time: cell.time.split(" - ")[0],
                 content: form.get("content")
