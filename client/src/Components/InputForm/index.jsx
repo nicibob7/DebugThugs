@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from 'react'
+import { useAuth } from '../../Contexts';
+
 import "./style.css"
 
 const InputForm = ({ times, setInputActive, dates, cell}) => {
     const [content, setContent] = useState("")
     const [entries, setEntries] = useState([])
+    const { user } = useAuth();
+
 
     // const [hours,setHours] = useState([...Array(24).keys()])
     // const [minutes,setMinutes] = useState([...Array(60).keys()])
@@ -21,6 +25,7 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
             method: "POST",
             body: JSON.stringify({
                 weekNum: cell.weekNum,
+                name: user,
                 day: cell.day,
                 time: cell.time.split(" - ")[0],
                 content: form.get("content")

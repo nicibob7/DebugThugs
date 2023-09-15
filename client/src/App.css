@@ -1,12 +1,10 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates&family=Poppins&family=Raleway:wght@300;400&family=Roboto:wght@500&display=swap'); */
+
+
 :root {
     --DeepCove: #071c42;
     --PuertoRico: #3dcab1;
     background-color: var(--DeepCove);
-}
-
-@font-face {
-    font-family: google-open-sans;
-    src: url(https://fonts.googleapis.com/css?family=OpenSans);
 }
 
 html {
@@ -15,6 +13,7 @@ html {
 body {
     height: 100%;
     background-image: linear-gradient(to bottom left, var(--DeepCove), var(--PuertoRico));
+    
 }
 
 #root {

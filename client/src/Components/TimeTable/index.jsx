@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios"
+import { useAuth } from '../../Contexts';
 import { Days, Times, TableContent, InputForm } from "../export"
 import "./style.css";
 import * as ReactDOM from "react-dom"
@@ -25,6 +26,8 @@ const TimeTable = () => {
   const [inputActive, setInputActive] = useState(false)
   const [array,setArray] = useState([])
   const dayRefs = useRef([])
+  const { user } = useAuth();
+
 
   const [refresh,setRefresh] = useState(0)
 
@@ -102,13 +105,19 @@ const TimeTable = () => {
   function loadEntries() {
     for(let entry in array){
       const e = array[entry]
-      const dayNum = resolveDay(e)
-      const idx = times.indexOf(e.time)
-      if(times.includes(e.time)){
-        dayRefs.current[dayNum].childNodes[idx].textContent = e.content
-        dayRefs.current[dayNum].childNodes[idx].style.backgroundColor = "white"
-        // console.log(dayRefs.current[dayNum].childNodes[idx])
+      console.log(e,user)
+      if(e.name == user.name){
+        const dayNum = resolveDay(e)
+        const idx = times.indexOf(e.time)
+        if(times.includes(e.time)){
+          dayRefs.current[dayNum].childNodes[idx].textContent = e.content
+          dayRefs.current[dayNum].childNodes[idx].style.backgroundColor = "white"
+          console.log(dayRefs.current[dayNum].childNodes[idx], user)
+
+          // console.log(dayRefs.current[dayNum].childNodes[idx])
+        }
       }
+
     }
   }
 
