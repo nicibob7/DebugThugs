@@ -22,17 +22,26 @@ const ProfilePage = () => {
         handleRefresh()
     }, [])
 
+    let filteredTasks = []
+
     try{
-        tasks.filter((task) => task.name == user.name) 
+            for(let i = 0; i < tasks.length; i++){
+                if(tasks[i].name === user.name){
+                    filteredTasks.push({day: tasks[i].day, content: tasks[i].content})
+                }
+            }
     }catch(err){
         console.log(err.message)
     }
+
+    console.log(tasks)
+    console.log(user)
 
 
     let listItems
 
     if (tasks){
-        listItems = tasks.map((task) => <li>{task.day}: {task.content}</li>)
+        listItems = filteredTasks.map((task) => <li>{task.day}: {task.content}</li>)
     }
 
     return (
