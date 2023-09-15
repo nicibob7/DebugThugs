@@ -5,6 +5,7 @@ class Entry {
     constructor(data) {
         this.id = data.id
         this.weekNum = data.weekNum
+        this.name = data.name
         this.day = data.day
         this.time = data.time
         this.content = data.content
@@ -29,11 +30,12 @@ class Entry {
         return entry
     }
 
-    static async create({weekNum, day, time, content}) {
+    static async create({weekNum, day, time, content, name}) {
         try {
             await client.connect()
             const response = await client.db("revision_app").collection("entries").insertOne({
                 weekNum: weekNum,
+                name:name,
                 day: day,
                 time: time,
                 content: content

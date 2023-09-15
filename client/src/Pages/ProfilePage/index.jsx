@@ -22,9 +22,6 @@ const ProfilePage = () => {
         handleRefresh()
     }, [])
 
-    console.log(tasks)
-    console.log(user)
-
     try{
         tasks.filter((task) => task.name == user.name) 
     }catch(err){
@@ -39,7 +36,7 @@ const ProfilePage = () => {
     }
 
     return (
-        <>
+        <div className="profile">
             <h1 style={{fontSize: 100}}>Account</h1>
             <div>
             <h2 style={{fontSize: 80, margin: 50}}>
@@ -65,7 +62,7 @@ const ProfilePage = () => {
                 
             </h2>
             </div>
-        </>
+        </div>
     );
 };
 
