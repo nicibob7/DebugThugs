@@ -25,7 +25,7 @@ const ProfilePage = () => {
     console.log(user,tasks)
 
     return (
-        <>
+        <div className="profile">
             <h1 style={{fontSize: 100}}>Account</h1>
             <div>
             <h2 style={{fontSize: 80, margin: 50}}>
@@ -48,7 +48,7 @@ const ProfilePage = () => {
                 {tasksDisplayed ? `Tasks: ${tasks == [] ? tasks : "You have no tasks to-do"}` : ""}
             </h2>
             </div>
-        </>
+        </div>
     );
 };
 
