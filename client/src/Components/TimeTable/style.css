@@ -105,12 +105,14 @@ display: flex;
 }
 
 .selected-box{
-background-color: rgb(255, 255, 255);
+  background-color: rgb(255, 255, 255);
+  border: solid var(--PuertoRico) 2px;
+  font-weight: bold;
 }
 
 .week-nav{
   font-size: 2rem;
-  color: white;
+  color: ivory;
   position: absolute;
   top: -70px;
   left: 0;
@@ -154,7 +156,7 @@ background-color: rgb(255, 255, 255);
 #refresh{
   font-size: 1.5rem;
   background-color: var(--DeepCove);
-  color: white;
+  color: ivory;
   padding: 8px;
   border-radius: 10px;
   border: none;
@@ -177,4 +179,12 @@ background-color: rgb(255, 255, 255);
   box-shadow: var(--PuertoRico) 0px 0px 5px 1px ;
   filter: brightness(1.1);
   transition: ease-in-out 0.1s;
+}
+p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }

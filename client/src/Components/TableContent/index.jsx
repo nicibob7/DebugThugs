@@ -57,6 +57,7 @@ const TableContent = ({ array, dayRefs, days, cell, weekNum, timeSlots, handleCl
           cell.content = el.content
         }
       }
+      console.log(el)
     }
   }
 
@@ -81,7 +82,7 @@ const TableContent = ({ array, dayRefs, days, cell, weekNum, timeSlots, handleCl
                   cell.day === day && cell.time === time ? "selected-box" : ""
                 }`}
                 onClick={() => handleClick(day, time, weekNum)}
-              ></div>
+              >{content}</div>
             );
           })}
         </div>

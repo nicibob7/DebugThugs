@@ -40,8 +40,7 @@ const TimeTable = () => {
 
   // Gets the cell information when user clicks and sets active cell
   const handleClick = (day, time, weekNum,content) => {
-    
-    setCell({ day, time, weekNum,content });
+    setCell({ day, time, weekNum, content });
     setInputActive(true)
   };
   
