@@ -1,28 +1,34 @@
-import React from "react"
-import { describe, it, expect, beforeEach, afterEach } from "vitest"
-import { screen, render, cleanup } from "@testing-library/react"
+import React from 'react';
+import { AuthProvider } from '../../Contexts';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { screen, render, cleanup } from '@testing-library/react';
 import matchers from '@testing-library/jest-dom/matchers';
 
 expect.extend(matchers);
 
-import TimeTable from "./index"
+import TimeTable from './index';
 
-describe("Timetable",() => {
+describe('Timetable', () => {
     beforeEach(() => {
-        render(<TimeTable />)
-    })
+        render(
+            <AuthProvider>
+                <TimeTable />
+            </AuthProvider>
+        );
+    });
+
+    it('Exists.', () => {
+        const tt = screen.getByTestId('timetable');
+        expect(tt).toBeTruthy();
+    });
+
+    it('Has three children.', () => {
+        const tt = screen.getByTestId('timetable');
+        const numChildren = tt.childElementCount;
+        expect(numChildren).toEqual(3);
+    });
 
     afterEach(() => {
-        cleanup()
-    })
-
-    it("Exists.",() => {
-        const tt = screen.getByTestId("timetable")
-        expect(tt).toBeTruthy()
-    })
-    it("Has two children.", () => {
-        const tt = screen.getByTestId("timetable")
-        const numChildren = tt.childElementCount
-        expect(numChildren).toEqual(2)
-    })
-})
+        cleanup();
+    });
+});

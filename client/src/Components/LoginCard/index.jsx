@@ -7,7 +7,7 @@ const LoginCard = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const { user, setUser } = useAuth();
+    const { setUser } = useAuth();
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -26,7 +26,10 @@ const LoginCard = () => {
             password: form.get('password'),
         };
         try {
-            const response = await axios.post('https://debugthugsapi.onrender.com/users/login', data);
+            const response = await axios.post(
+                'https://debugthugsapi.onrender.com/users/login',
+                data
+            );
             if (response.status === 200) {
                 localStorage.setItem('token', response.data.token);
                 const token = localStorage.getItem('token');
@@ -57,7 +60,13 @@ const LoginCard = () => {
                             Email
                         </label>
                         <br />
-                        <input type="text" name="email" value={email} onChange={handleEmail} />
+                        <input
+                            role="input"
+                            type="text"
+                            name="email"
+                            value={email}
+                            onChange={handleEmail}
+                        />
                     </div>
                     <div>
                         <label className="input-label" htmlFor="password">
@@ -65,6 +74,7 @@ const LoginCard = () => {
                         </label>
                         <br />
                         <input
+                            role="input"
                             type="password"
                             name="password"
                             value={password}
@@ -73,7 +83,7 @@ const LoginCard = () => {
                     </div>
                 </div>
                 <div>
-                    <button className="login-button" type="submit">
+                    <button role="button" className="login-button" type="submit">
                         Login
                     </button>
                 </div>
