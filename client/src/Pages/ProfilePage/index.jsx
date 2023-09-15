@@ -23,6 +23,14 @@ const ProfilePage = () => {
     }, [])
 
     console.log(tasks)
+    console.log(user)
+
+    try{
+        tasks.filter((task) => task.name == user.name) 
+    }catch(err){
+        console.log(err.message)
+    }
+
 
     let listItems
 
