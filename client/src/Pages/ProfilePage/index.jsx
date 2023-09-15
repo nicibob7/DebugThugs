@@ -24,6 +24,12 @@ const ProfilePage = () => {
 
     console.log(tasks)
 
+    let listItems
+
+    if (tasks){
+        listItems = tasks.map((task) => <li>{task.day}: {task.content}</li>)
+    }
+
     return (
         <>
             <h1 style={{fontSize: 100}}>Account</h1>
@@ -45,7 +51,10 @@ const ProfilePage = () => {
             <div>
             <h2 style={{fontSize: 80, margin: 50}}>
                 <button style={{backgroundColor: '#4CAF50', border: 'none', paddingTop: '1%', paddingBottom: '1%', paddingLeft: '2%', paddingRight: '2%', fontSize: 30, display:'block', margin:50, marginLeft: 0}} onClick = {handleDisplay}>Click to show tasks: </button>
-                {tasksDisplayed ? `Tasks: ${tasks == [] ? tasks : "You have no tasks to-do"}` : ""}
+                <ul>
+                    {tasksDisplayed ? listItems : ""}
+                </ul>
+                
             </h2>
             </div>
         </>
