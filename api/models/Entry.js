@@ -5,6 +5,7 @@ class Entry {
     constructor(data) {
         this.id = data.id
         this.weekNum = data.weekNum
+        this.name = data.name
         this.day = data.day
         this.time = data.time
         this.content = data.content
