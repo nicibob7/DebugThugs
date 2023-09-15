@@ -88,7 +88,7 @@ const InputForm = ({ times, setInputActive, dates, cell}) => {
                 <span id="date">{dates[resolveDay()]}<br></br>{cell.time}</span>
 
                 </div>
-                <input type="text" id="input" name="content" value={content} onChange={handleInput} placeholder="Add to your timetable" />
+                <input type="text" id="input" name="content" value={content} onChange={handleInput} placeholder="Add to your timetable" required/>
                 <button type="submit">Submit</button>
             </form>
 
