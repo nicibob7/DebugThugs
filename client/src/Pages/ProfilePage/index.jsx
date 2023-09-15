@@ -9,7 +9,7 @@ const ProfilePage = () => {
     const [tasksDisplayed, setTasksDisplayed] = useState(false)
 
     const handleRefresh = async () => {
-        const response = await axios.get('http://localhost:3000/timetable/')
+        const response = await axios.get('https://debugthugsapi.onrender.com/timetable/')
         const data = response.data.entry
         setTasks(data)
     }
