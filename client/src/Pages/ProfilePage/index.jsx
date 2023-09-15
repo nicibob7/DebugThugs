@@ -22,7 +22,7 @@ const ProfilePage = () => {
         handleRefresh()
     }, [])
 
-    console.log(tasks)
+    console.log(user,tasks)
 
     return (
         <>
