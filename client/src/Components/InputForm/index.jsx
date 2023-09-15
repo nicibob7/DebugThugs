@@ -24,7 +24,7 @@ const InputForm = ({ times, setInputActive, dates, cell }) => {
             method: 'POST',
             body: JSON.stringify({
                 weekNum: cell.weekNum,
-                name: user,
+                name: user.name,
                 day: cell.day,
                 time: cell.time.split(' - ')[0],
                 content: form.get('content'),
@@ -90,22 +90,14 @@ const InputForm = ({ times, setInputActive, dates, cell }) => {
                                 {cell.time}
                             </span>
                         </div>
-                        <input
-                            type="text"
-                            id="input"
-                            name="content"
-                            value={content}
-                            onChange={handleInput}
-                            placeholder="Add to your timetable"
-                        />
-                        <button data-testid="submit-btn" type="submit">
-                            Submit
-                        </button>
+                        <input type="text" id="input" name="content" value={content} onChange={handleInput} placeholder="Add to your timetable" required/>
+                        <button type="submit">Submit</button>
                     </form>
                 </div>
             </div>
         </>
     );
 };
+
 
 export default InputForm;
